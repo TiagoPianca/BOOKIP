@@ -1,4 +1,51 @@
-<button type="button" class="btn btn-primary">Editar</button>
-<button type="button" class="btn btn-secondary">Agregar</button>
-<button type="button" class="btn btn-success">Eliminar</button>
+<div class="container">
+<button type="button" class="btn btn-primary me-2" (click)="modificarregistro()">Editar</button>
+<button type="button" class="btn btn-success me-2" (click)="agregarregistro()">Agregar</button>
+<button type="button" class="btn btn-danger me-4">Eliminar</button>
+<button type="button" class= "btn btn-dark me-4 " (click)="obtenerregistros()">Mostrar Registros</button>
+<button type="button" class="btn btn-dark me-4">Mostrar Usuarios</button>
 
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Número Cliente
+                </th>
+                <th>
+                    Nombre Cliente
+                </th>
+                <th>
+                    Maccpe
+                </th>
+                <th>
+                    Dirección IP
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor= "let registro of registros">
+                <td>
+                    {{registro.id}}
+                </td>
+                <td>
+                    {{registro.numerocliente}}
+                </td>
+                <td>
+                    {{registro.nombrecliente}}
+                </td>
+                <td>
+                    {{registro.maccpe}}
+                </td>
+                <td>
+                    {{registro.direccionip}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</div>

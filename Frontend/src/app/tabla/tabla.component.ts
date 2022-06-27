@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Registros } from '../registros';
+import { TareasService } from '../servicios/tareas.service';
 
 @Component({
   selector: 'app-tabla',
@@ -6,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tabla.component.css']
 })
 export class TablaComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  registros: Registros
+  
+  constructor(private tareaservice: TareasService) { 
   }
+
+  ngOnInit(  ): void {}
+  
 
 }

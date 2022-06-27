@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { TareasService } from './servicios/tareas.service';
 import { HttpClient } from '@angular/common/http';
+import { Registros } from './registros';
+import { TablaComponent } from './tabla/tabla.component';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +16,11 @@ export class AppComponent {
     private http: HttpClient,
     private tareasService: TareasService
   ) { }
-  ngOnInit() {
-    this.http.get("http://localhost:8080/listarregistros",{responseType:'text' }).subscribe((resp: any) =>{
-      this.title = resp;
-    }),
-    (error:any) =>{
-      console.log(error)
+ 
+    ListarRegistros() {
+      this.tareasService.obtenerlistaregistros()
+      .subscribe(any => {
+        console.log(any);
+      });
     }
-}
-}
+  }

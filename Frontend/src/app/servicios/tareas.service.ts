@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-import { Registros } from './../interfaces/registros';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Usuarios } from './../interfaces/usuarios';
+import { Observable } from 'rxjs';
+import { Registros } from '../registros';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +14,12 @@ export class TareasService {
   constructor(
     private http: HttpClient
   ) { }
-prueba(
 
-){this.http
-  .get('http://localhost:8080/prueba', { responseType: 'text' })
-  .subscribe((resp: any) => {
-    this.respuesta = resp;
-  }),
-  (error: any) => {
-    console.log(error);
-  };}
+  obtenerlistaregistros():Observable<Registros[]>{
+    return this.http.get<Registros[]>(`http://localhost:8080/listarregistros`);
+  }
 
+  AgregarRegistro(registro:Registros):Observable<Object>{
+    return this.http.post(`${this.path}agregarregistro`, registro);
+  }
 }
