@@ -31,6 +31,7 @@ public int getId() {
     return id;
 }
 
+
 public int getnumerocliente() {
     return numerocliente;
 }
