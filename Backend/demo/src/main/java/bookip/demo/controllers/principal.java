@@ -20,6 +20,10 @@ import bookip.demo.models.*;
 
 public class principal {
 
+  //
+  //LISTADO DE TABLAS(REGISTROS, USUARIOS, CLIENTES)
+  //
+
   @Autowired
 
   private RegistrosServices RegistrosRepo;
@@ -38,18 +42,22 @@ public class principal {
 
   }
 
+  //
+  // ADD EN REGISTROS, USUARIOS Y CLIENTES
+  //
+
   @Autowired
   private RegistrosServices Registrosadd;
 
   @PostMapping(path = "/agregarregistro")
-  public String addNewRegistro(@RequestParam int numerocliente,
+  public String addNewRegistro(@RequestParam String numcliente,
       @RequestParam String nombrecliente, @RequestParam String maccpe, @RequestParam String direccionip) {
 
     registros agregar = new registros();
-    agregar.setdireccionip(direccionip);
-    agregar.setmaccpe(maccpe);
-    agregar.setnombrecliente(nombrecliente);
-    agregar.setnumerocliente(numerocliente);
+    agregar.setDireccionip(direccionip);;
+    agregar.setMaccpe(maccpe);;
+    agregar.setNombrecliente(nombrecliente);;
+    agregar.setNumcliente(numcliente);;
 
     Registrosadd.save(agregar);
     return "Registro guardado exitosamente";
@@ -65,10 +73,14 @@ public class principal {
     usuarios agregar = new usuarios();
     agregar.setNombreusuario(nombreusuario);
     agregar.setPassword(password);
-    agregar.setNivelacceso(nivelacceso);
+    agregar.setNivelacceso(nivelacceso);;
     Usuariosadd.save(agregar);
     return "Usuario guardado exitosamente";
   }
+
+  //
+  //BUSQUEDAS EN TABLA REGISTROS
+  //
 
   @Autowired
   private RegistrosServices BuscarNombreCliente;
@@ -80,12 +92,12 @@ public class principal {
   }
 
   @Autowired
-  private RegistrosServices BuscarNumeroCliente;
+  private RegistrosServices BuscarNumCliente;
 
-  @PostMapping(path = "buscarpornumerocli")
-  public List<registros> buscarpornumerocliente(@RequestParam String numeroabuscartemp) {
-    String numeroabuscar = "%" + numeroabuscartemp + "%";
-    return BuscarNumeroCliente.buscarpornumerocliente(numeroabuscar);
+  @PostMapping(path = "buscarpornumcliente")
+  public List<registros> buscarpornumcliente(@RequestParam String numeroabuscartemp) {
+    String numabuscar = "%" + numeroabuscartemp + "%";
+    return BuscarNumCliente.buscarpornumcliente(numabuscar);
   }
 
   @Autowired
@@ -107,12 +119,29 @@ public class principal {
   }
 
   @Autowired
+  private UsuariosServices BuscarUsuario;
+
+  @PostMapping(path = "buscarpornombreusuario")
+  public List<usuarios> buscarpornombreusuario(@RequestParam String usuariotemp) {
+    String usuarioabuscar = "%" + usuariotemp + "%";
+    return BuscarUsuario.buscarpornombreusuario(usuarioabuscar);
+  }
+
+  //
+  //LOGIN(SIN UTILIZAR POR EL MOMENTO)
+  //
+
+  @Autowired
   private UsuariosServices login;
 
   @PostMapping(path = "login")
-  public List<usuarios> login(@RequestParam String username, String password) {
-    return login.login(username, password);
+  public List<usuarios> login(@RequestParam String nombreusuario, String password) {
+    return login.login(nombreusuario, password);
   }
+
+  //
+  //ELIMINAR REGISTROS, USUARIOS Y CLIENTES
+  //
 
   @Autowired
   private RegistrosServices borrar;
@@ -144,15 +173,19 @@ public class principal {
     }
   }
 
+  //
+  //MODIFICACION DE REGISTROS, USUARIOS Y CLIENTES
+  //
+
   @Autowired
   private RegistrosServices modificarregistro;
 
   @PostMapping(path = "modificarregistro")
-  public ResponseEntity<Long> modificarregistroo(@RequestParam Long id, int numerocliente, String nombrecliente,
+  public ResponseEntity<Long> modificarregistroo(@RequestParam Long id, String numcliente, String nombrecliente,
       String maccpe, String direccionip) {
     if (id instanceof Long) {
 
-      modificarregistro.modificarregistro(id, numerocliente, nombrecliente, maccpe, direccionip);
+      modificarregistro.modificarregistro(id, numcliente, nombrecliente, maccpe, direccionip);
       return new ResponseEntity<>(HttpStatus.OK);
     } else {
 
