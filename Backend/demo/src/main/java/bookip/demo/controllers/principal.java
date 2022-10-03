@@ -42,6 +42,14 @@ public class principal {
 
   }
 
+  @Autowired
+  private ClientesServices ClientesRepo;
+
+  @GetMapping(path = "listarclientes")
+  public List<clientes> mostrarclientes() {
+    return ClientesRepo.findAll();
+  }
+
   //
   // ADD EN REGISTROS, USUARIOS Y CLIENTES
   //
@@ -71,11 +79,27 @@ public class principal {
       @RequestParam String nombreusuario, @RequestParam String password) {
 
     usuarios agregar = new usuarios();
-    agregar.setNombreusuario(nombreusuario);
-    agregar.setPassword(password);
+    agregar.setNombreusuario(nombreusuario);;
+    agregar.setPassword(password);;
     agregar.setNivelacceso(nivelacceso);;
+
     Usuariosadd.save(agregar);
     return "Usuario guardado exitosamente";
+  }
+
+  @Autowired
+  private ClientesServices Clientesadd;
+
+  @PostMapping(path = "/agregarcliente")
+  public String nuevoCliente(@RequestParam String nombrecliente, @RequestParam String nombreusuario, @RequestParam String ciudad) {
+
+    clientes agregar = new clientes();
+    agregar.setNombrecliente(nombrecliente);;
+    agregar.setNombreusuario(nombreusuario);;
+    agregar.setCiudad(ciudad);;
+    
+    Clientesadd.save(agregar);
+    return "CLiente guardado exitosamente";
   }
 
   //
@@ -125,6 +149,18 @@ public class principal {
   public List<usuarios> buscarpornombreusuario(@RequestParam String usuariotemp) {
     String usuarioabuscar = "%" + usuariotemp + "%";
     return BuscarUsuario.buscarpornombreusuario(usuarioabuscar);
+  }
+
+  //
+  //NO FUNCIONAN, AVERIGUAR POR QUE
+  //
+  @Autowired
+  private UsuariosServices BuscarporID;
+
+  @PostMapping(path = "buscarporid")
+  public List<usuarios> buscarporid(@RequestParam Long id) {
+    Long idabuscar = id;
+    return BuscarporID.buscarusuarioporid(idabuscar);
   }
 
   //
