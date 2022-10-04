@@ -21,7 +21,7 @@ public interface UsuariosServices extends Usuarios {
     List<usuarios> buscarpornombreusuario(@Param("nombreusuario") String nombreusuario);
 
     @Query(value = "SELECT * FROM usuarios WHERE id like = :id", nativeQuery = true)
-    List<usuarios> buscarusuarioporid(@Param("id") Long id);
+    List<usuarios> buscarporid(@Param("id") Long id);
 
     @Modifying
     @Transactional

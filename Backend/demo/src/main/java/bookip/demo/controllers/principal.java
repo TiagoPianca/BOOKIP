@@ -152,7 +152,7 @@ public class principal {
   }
 
   //
-  //NO FUNCIONAN, AVERIGUAR POR QUE
+  //NO FUNCIONA, AVERIGUAR POR QUE
   //
   @Autowired
   private UsuariosServices BuscarporID;
@@ -160,7 +160,7 @@ public class principal {
   @PostMapping(path = "buscarporid")
   public List<usuarios> buscarporid(@RequestParam Long id) {
     Long idabuscar = id;
-    return BuscarporID.buscarusuarioporid(idabuscar);
+    return BuscarporID.buscarporid(idabuscar);
   }
 
   //
