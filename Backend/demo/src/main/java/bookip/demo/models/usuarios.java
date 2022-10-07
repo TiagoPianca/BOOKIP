@@ -16,7 +16,7 @@ public class usuarios {
 
     @Getter
     @Setter
-    private int id;
+    private String direccioncorreo;
     @Getter
     @Setter
     private String nombreusuario;
@@ -25,6 +25,9 @@ public class usuarios {
     private String password;
     @Getter
     @Setter
-    private boolean nivelacceso;
+    private Boolean nivelacceso;
+    @Getter
+    @Setter
+    private Boolean activo;
 
 }

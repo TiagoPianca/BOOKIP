@@ -26,4 +26,8 @@ public class clientes {
     @Getter
     @Setter
     private String ciudad;
+
+    @Getter
+    @Setter
+    private Boolean activo;
 }

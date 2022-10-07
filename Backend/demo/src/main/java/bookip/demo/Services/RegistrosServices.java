@@ -12,29 +12,32 @@ import bookip.demo.models.registros;
 
 @Service
 public interface RegistrosServices extends Registros {
- 
-@Query (value = "SELECT * FROM registros WHERE nombrecliente like :nombreabuscar", nativeQuery = true)
-List<registros> buscarpornombre(@Param("nombreabuscar") String nombreabuscar); 
 
-@Query (value = "SELECT * FROM registros WHERE numcliente like :numabuscar", nativeQuery = true)
-List<registros> buscarpornumcliente(@Param("numabuscar") String numabuscar);
+    @Query(value = "SELECT * FROM registros WHERE nombrecliente like :nombreabuscar", nativeQuery = true)
+    List<registros> buscarpornombre(@Param("nombreabuscar") String nombreabuscar);
 
-@Query (value = "SELECT * FROM registros WHERE maccpe like :macabuscar", nativeQuery = true)
-List<registros> buscarpormac(@Param("macabuscar") String macabuscar); 
+    @Query(value = "SELECT * FROM registros WHERE numcliente like :numabuscar", nativeQuery = true)
+    List<registros> buscarpornumcliente(@Param("numabuscar") String numabuscar);
 
-@Query (value = "SELECT * FROM registros WHERE direccionip like :ipabuscar", nativeQuery = true)
-List<registros> buscarporip(@Param("ipabuscar") String ipabuscar) ;
+    @Query(value = "SELECT * FROM registros WHERE maccpe like :macabuscar", nativeQuery = true)
+    List<registros> buscarpormac(@Param("macabuscar") String macabuscar);
 
-@Modifying
-@Transactional
-@Query (value = "DELETE FROM registros WHERE id =:id", nativeQuery = true)
-void borrarregistro(@Param("id") Long id);
+    @Query(value = "SELECT * FROM registros WHERE direccionip like :ipabuscar", nativeQuery = true)
+    List<registros> buscarporip(@Param("ipabuscar") String ipabuscar);
 
-@Modifying
-@Transactional
-@Query (value = "UPDATE registros SET numcliente = :numcliente, nombrecliente = :nombrecliente, maccpe = :maccpe, direccionip = :direccionip WHERE id = :id", nativeQuery = true)
-void modificarregistro(@Param("id") Long id, @Param("numcliente") String numcliente, @Param("nombrecliente") String nombrecliente, @Param("maccpe") String maccpe, @Param("direccionip") String direccionip);
+    @Query(value = "SELECT * FROM registros WHERE activo like :activo", nativeQuery = true)
+    List<registros> buscarregistrosactivos(@Param("activo") boolean activo);
 
-} 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE registros SET numcliente = :numcliente, nombrecliente = :nombrecliente, maccpe = :maccpe, direccionip = :direccionip, activo = :activo WHERE id = :id", nativeQuery = true)
+    void borrarregistro(@Param("activo") boolean activo);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE registros SET numcliente = :numcliente, nombrecliente = :nombrecliente, maccpe = :maccpe, direccionip = :direccionip WHERE id = :id", nativeQuery = true)
+    void modificarregistro(@Param("id") Long id, @Param("numcliente") String numcliente,
+            @Param("nombrecliente") String nombrecliente, @Param("maccpe") String maccpe,
+            @Param("direccionip") String direccionip);
 
+}

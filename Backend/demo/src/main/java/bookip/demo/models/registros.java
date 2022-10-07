@@ -15,7 +15,7 @@ public class registros {
 
     @Getter
     @Setter
-    private int id;
+    private Integer id;
     @Getter
     @Setter
     private String numcliente;
@@ -28,5 +28,8 @@ public class registros {
     @Getter
     @Setter
     private String direccionip;
+    @Getter
+    @Setter
+    private Boolean activo;
 
 }
