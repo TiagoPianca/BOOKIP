@@ -20,18 +20,15 @@ public interface UsuariosServices extends Usuarios {
     @Query(value = "SELECT * FROM usuarios WHERE nombreusuario like :nombreusuario", nativeQuery = true)
     List<usuarios> buscarpornombreusuario(@Param("nombreusuario") String nombreusuario);
 
-    @Query(value = "SELECT * FROM usuarios WHERE id like = :id", nativeQuery = true)
-    List<usuarios> buscarporid(@Param("id") Long id);
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE clientes SET nivelacceso = :nivelacceso, nombreusuario = :nombreusuario, password = :password, activo = :activo WHERE nombrecliente = :nombrecliente", nativeQuery = true)
+    void borrarusuario(@Param("activo") boolean activo);
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM usuarios WHERE id =:id", nativeQuery = true)
-    void borrarusuario(@Param("id") Long id);
-
-    @Modifying
-    @Transactional
-    @Query(value = "UPDATE usuarios SET nivelacceso = :nivelacceso, nombreusuario = :nombreusuario, password = :password WHERE id = :id", nativeQuery = true)
-    void modificarusuario(@Param("id") Long id, @Param("nivelacceso") boolean nivelacceso,
+    @Query(value = "UPDATE usuarios SET nivelacceso = :nivelacceso, nombreusuario = :nombreusuario, password = :password WHERE nombreusuario = :nombreusuario", nativeQuery = true)
+    void modificarusuario(@Param("nivelacceso") Boolean nivelacceso,
             @Param("nombreusuario") String nombreusuario, @Param("password") String password);
 
 }

@@ -21,7 +21,7 @@ import bookip.demo.models.*;
 public class principal {
 
   //
-  //LISTADO DE TABLAS(REGISTROS, USUARIOS, CLIENTES)
+  // LISTADO DE TABLAS(REGISTROS, USUARIOS, CLIENTES)
   //
 
   @Autowired
@@ -29,7 +29,7 @@ public class principal {
   private RegistrosServices RegistrosRepo;
 
   @GetMapping(path = "listarregistros")
-  public List<registros> mostrarregistros() {
+  public Iterable<registros> mostrarregistros() {
     return RegistrosRepo.findAll();
   }
 
@@ -46,7 +46,7 @@ public class principal {
   private ClientesServices ClientesRepo;
 
   @GetMapping(path = "listarclientes")
-  public List<clientes> mostrarclientes() {
+  public Iterable<clientes> mostrarclientes() {
     return ClientesRepo.findAll();
   }
 
@@ -57,15 +57,18 @@ public class principal {
   @Autowired
   private RegistrosServices Registrosadd;
 
-  @PostMapping(path = "/agregarregistro")
-  public String addNewRegistro(@RequestParam String numcliente,
-      @RequestParam String nombrecliente, @RequestParam String maccpe, @RequestParam String direccionip) {
+  @PostMapping(path = "agregarregistro")
+  public String addNewRegistro(@RequestParam Integer id,@RequestParam String numcliente,
+      @RequestParam String nombrecliente, @RequestParam String maccpe, @RequestParam String direccionip,
+      @RequestParam Boolean activo) {
 
     registros agregar = new registros();
-    agregar.setDireccionip(direccionip);;
-    agregar.setMaccpe(maccpe);;
-    agregar.setNombrecliente(nombrecliente);;
-    agregar.setNumcliente(numcliente);;
+    agregar.setId(id);
+    agregar.setDireccionip(direccionip);
+    agregar.setMaccpe(maccpe);
+    agregar.setNombrecliente(nombrecliente);
+    agregar.setNumcliente(numcliente);
+    agregar.setActivo(activo);
 
     Registrosadd.save(agregar);
     return "Registro guardado exitosamente";
@@ -74,14 +77,15 @@ public class principal {
   @Autowired
   private UsuariosServices Usuariosadd;
 
-  @PostMapping(path = "/agregarusuario")
+  @PostMapping(path = "agregarusuario")
   public String addNewUser(@RequestParam boolean nivelacceso,
-      @RequestParam String nombreusuario, @RequestParam String password) {
+      @RequestParam String nombreusuario, @RequestParam String password, @RequestParam Boolean activo) {
 
     usuarios agregar = new usuarios();
-    agregar.setNombreusuario(nombreusuario);;
-    agregar.setPassword(password);;
-    agregar.setNivelacceso(nivelacceso);;
+    agregar.setNombreusuario(nombreusuario);
+    agregar.setPassword(password);
+    agregar.setNivelacceso(nivelacceso);
+    agregar.setActivo(activo);
 
     Usuariosadd.save(agregar);
     return "Usuario guardado exitosamente";
@@ -91,19 +95,21 @@ public class principal {
   private ClientesServices Clientesadd;
 
   @PostMapping(path = "/agregarcliente")
-  public String nuevoCliente(@RequestParam String nombrecliente, @RequestParam String nombreusuario, @RequestParam String ciudad) {
+  public String nuevoCliente(@RequestParam String nombrecliente, @RequestParam String nombreusuario,
+      @RequestParam String ciudad, @RequestParam Boolean activo) {
 
     clientes agregar = new clientes();
-    agregar.setNombrecliente(nombrecliente);;
-    agregar.setNombreusuario(nombreusuario);;
-    agregar.setCiudad(ciudad);;
-    
+    agregar.setNombrecliente(nombrecliente);
+    agregar.setNombreusuario(nombreusuario);
+    agregar.setCiudad(ciudad);
+    agregar.setActivo(activo);
+
     Clientesadd.save(agregar);
     return "CLiente guardado exitosamente";
   }
 
   //
-  //BUSQUEDAS EN TABLA REGISTROS
+  // BUSQUEDAS EN TABLA REGISTROS
   //
 
   @Autowired
@@ -142,6 +148,10 @@ public class principal {
     return BuscarMAC.buscarpormac(macabuscar);
   }
 
+  //
+  // BUSCAR EN TABLA USUARIOS
+  //
+
   @Autowired
   private UsuariosServices BuscarUsuario;
 
@@ -150,21 +160,8 @@ public class principal {
     String usuarioabuscar = "%" + usuariotemp + "%";
     return BuscarUsuario.buscarpornombreusuario(usuarioabuscar);
   }
-
   //
-  //NO FUNCIONA, AVERIGUAR POR QUE
-  //
-  @Autowired
-  private UsuariosServices BuscarporID;
-
-  @PostMapping(path = "buscarporid")
-  public List<usuarios> buscarporid(@RequestParam Long id) {
-    Long idabuscar = id;
-    return BuscarporID.buscarporid(idabuscar);
-  }
-
-  //
-  //LOGIN(SIN UTILIZAR POR EL MOMENTO)
+  // LOGIN(SIN UTILIZAR POR EL MOMENTO)
   //
 
   @Autowired
@@ -176,17 +173,17 @@ public class principal {
   }
 
   //
-  //ELIMINAR REGISTROS, USUARIOS Y CLIENTES
+  // ELIMINAR REGISTROS, USUARIOS Y CLIENTES
   //
 
   @Autowired
   private RegistrosServices borrar;
 
   @DeleteMapping(path = "borrarregistro")
-  public ResponseEntity<Long> borrarregistro(@RequestParam Long id) {
-    if (id instanceof Long) {
+  public ResponseEntity<Boolean> borrarregistro(@RequestParam Boolean activo) {
+    if (activo instanceof Boolean) {
 
-      borrar.borrarregistro(id);
+      borrar.borrarregistro(activo);
       return new ResponseEntity<>(HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -198,10 +195,10 @@ public class principal {
   private UsuariosServices borraruser;
 
   @DeleteMapping(path = "borrarusuario")
-  public ResponseEntity<Long> borrarusuario(@RequestParam Long id) {
-    if (id instanceof Long) {
+  public ResponseEntity<Boolean> borrarusuario(@RequestParam Boolean activo) {
+    if (activo instanceof Boolean) {
 
-      borraruser.borrarusuario(id);
+      borraruser.borrarusuario(activo);
       return new ResponseEntity<>(HttpStatus.OK);
     } else {
 
@@ -210,7 +207,7 @@ public class principal {
   }
 
   //
-  //MODIFICACION DE REGISTROS, USUARIOS Y CLIENTES
+  // MODIFICACION DE REGISTROS, USUARIOS Y CLIENTES
   //
 
   @Autowired
@@ -233,11 +230,11 @@ public class principal {
   private UsuariosServices modificarusuario;
 
   @PostMapping(path = "modificarusuario")
-  public ResponseEntity<Long> modificarusuario(@RequestParam Long id, boolean nivelacceso, String nombreusuario,
+  public ResponseEntity<String> modificarusuario(@RequestParam Boolean nivelacceso, String nombreusuario,
       String password) {
-    if (id instanceof Long) {
+    if (nombreusuario instanceof String) {
 
-      modificarusuario.modificarusuario(id, nivelacceso, nombreusuario, password);
+      modificarusuario.modificarusuario(nivelacceso, nombreusuario, password);
       return new ResponseEntity<>(HttpStatus.OK);
     } else {
 
