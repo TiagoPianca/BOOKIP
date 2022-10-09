@@ -20,8 +20,8 @@ public interface ClientesServices extends Clientes {
         @Query(value = "SELECT * FROM clientes WHERE nombreusuario like :nombreusuario", nativeQuery = true)
         List<clientes> buscarporusuario(@Param("nombreusuario") String nombreusuario);
 
-        @Query(value = "SELECT * FROM clientes WHERE ciudad like :ciudadabuscar", nativeQuery = true)
-        List<clientes> buscarporciudad(@Param("ciudadabuscar") String ciudadabuscar);
+        @Query(value = "SELECT * FROM clientes WHERE ciudad like :ciudad", nativeQuery = true)
+        List<clientes> buscarporciudad(@Param("ciudad") String ciudad);
 
         @Query(value = "SELECT * FROM clientes WHERE activo like :activo", nativeQuery = true)
         List<clientes> buscarclientesactivos(@Param("activo") boolean activo);
@@ -29,7 +29,7 @@ public interface ClientesServices extends Clientes {
         @Modifying
         @Transactional
         @Query(value = "UPDATE clientes SET nombrecliente = :nombrecliente, nombreusuario = :nombreusuario, ciudad = :ciudad, activo = :activo WHERE nombrecliente = :nombrecliente", nativeQuery = true)
-        void borrarcliente(@Param("activo") boolean activo);
+        void borrarcliente(@Param("nombrecliente") String nombrecliente, @Param("activo") Boolean activo);
 
         @Modifying
         @Transactional

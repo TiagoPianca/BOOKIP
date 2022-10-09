@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
+//import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,7 +68,7 @@ public class principal {
     agregar.setMaccpe(maccpe);
     agregar.setNombrecliente(nombrecliente);
     agregar.setNumcliente(numcliente);
-    agregar.setActivo(activo);
+    agregar.setActivo(activo = true);
 
     Registrosadd.save(agregar);
     return "Registro guardado exitosamente";
@@ -85,7 +85,7 @@ public class principal {
     agregar.setNombreusuario(nombreusuario);
     agregar.setPassword(password);
     agregar.setNivelacceso(nivelacceso);
-    agregar.setActivo(activo);
+    agregar.setActivo(activo = true);
 
     Usuariosadd.save(agregar);
     return "Usuario guardado exitosamente";
@@ -102,7 +102,7 @@ public class principal {
     agregar.setNombrecliente(nombrecliente);
     agregar.setNombreusuario(nombreusuario);
     agregar.setCiudad(ciudad);
-    agregar.setActivo(activo);
+    agregar.setActivo(activo = true);
 
     Clientesadd.save(agregar);
     return "CLiente guardado exitosamente";
@@ -152,8 +152,8 @@ public class principal {
   private RegistrosServices BuscarRegistrosActivos;
 
   @PostMapping(path = "buscarregistrosactivos")
-  public Iterable<registros> buscarregistrosactivos(@RequestParam Boolean regactivosabuscar) {
-    Boolean activosabuscar = regactivosabuscar;
+  public List<registros> buscarregistrosactivos(@RequestParam Boolean regactivos) {
+    Boolean activosabuscar = regactivos = true;
     return BuscarRegistrosActivos.buscarregistrosactivos(activosabuscar);
   }
 
@@ -175,8 +175,39 @@ public class principal {
 
   @PostMapping(path = "buscarusersactivos")
   public List<usuarios> buscarusersactivos(@RequestParam Boolean usersactivo) {
-    Boolean activosabuscar = usersactivo;
+    Boolean activosabuscar = usersactivo = true;
     return BuscarUsersActivos.buscarusersactivos(activosabuscar);
+  }
+
+  //
+  // BUSCAR EN TABLA CLIENTES (BUSCARPORCIUDAD NO FUNCIONA, ERROR 404)
+  //
+
+  @Autowired
+  private ClientesServices BuscarClientes;
+
+  @PostMapping(path = "buscarclientes")
+  public List<clientes> buscarcliente(@RequestParam String nombreclientetemp) {
+    String clienteabuscar = "%" + nombreclientetemp + "%";
+    return BuscarClientes.buscarpornombrecliente(clienteabuscar);
+  }
+
+  @Autowired
+  private ClientesServices BuscarCiudad;
+
+  @PostMapping(path = "buscarporciudad")
+  public List<clientes> buscarciudad(@RequestParam String ciudadtemp) {
+    String ciudadabuscar = "%" + ciudadtemp + "%";
+    return BuscarCiudad.buscarporciudad(ciudadabuscar);
+  }
+
+  @Autowired
+  private ClientesServices BuscarClientesActivos;
+
+  @PostMapping(path = "buscarclientesactivos")
+  public List<clientes> buscarclientesactivos(@RequestParam Boolean clienteactivo) {
+    Boolean clienteabuscar = clienteactivo = true;
+    return BuscarClientesActivos.buscarclientesactivos(clienteabuscar);
   }
 
   //
@@ -196,13 +227,13 @@ public class principal {
   //
 
   @Autowired
-  private RegistrosServices borrar;
+  private RegistrosServices BorrarRegistro;
 
-  @DeleteMapping(path = "borrarregistro")
-  public ResponseEntity<Boolean> borrarregistro(@RequestParam Boolean activo) {
-    if (activo instanceof Boolean) {
+  @PostMapping(path = "borrarregistro")
+  public ResponseEntity<String> borrarregistro(@RequestParam String nombrecliente, @RequestParam Boolean activo) {
+    if (nombrecliente instanceof String) {
 
-      borrar.borrarregistro(activo);
+      BorrarRegistro.borrarregistro(nombrecliente,activo);
       return new ResponseEntity<>(HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -211,15 +242,30 @@ public class principal {
   }
 
   @Autowired
-  private UsuariosServices borraruser;
+  private UsuariosServices BorrarUsuario;
 
-  @DeleteMapping(path = "borrarusuario")
-  public ResponseEntity<Boolean> borrarusuario(@RequestParam Boolean activo) {
-    if (activo instanceof Boolean) {
+  @PostMapping(path = "borrarusuario")
+  public ResponseEntity<String> borrarusuario(@RequestParam String nombreusuario, Boolean activo) {
+    if (nombreusuario instanceof String) {
 
-      borraruser.borrarusuario(activo);
+      BorrarUsuario.borrarusuario(nombreusuario, activo );
       return new ResponseEntity<>(HttpStatus.OK);
     } else {
+
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @Autowired
+  private ClientesServices BorrarCliente;
+
+  @PostMapping(path = "borrarcliente")
+  public ResponseEntity<String> borrarcliente(@RequestParam String nombrecliente, Boolean activo) {
+    if(nombrecliente instanceof String) {
+
+      BorrarCliente.borrarcliente(nombrecliente, activo);
+      return new ResponseEntity<>(HttpStatus.OK);
+    }else {
 
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
@@ -230,14 +276,14 @@ public class principal {
   //
 
   @Autowired
-  private RegistrosServices modificarregistro;
+  private RegistrosServices ModificarRegistro;
 
   @PostMapping(path = "modificarregistro")
-  public ResponseEntity<Long> modificarregistroo(@RequestParam Long id, String numcliente, String nombrecliente,
+  public ResponseEntity<Long> modificarregistro(@RequestParam Long id, String numcliente, String nombrecliente,
       String maccpe, String direccionip) {
     if (id instanceof Long) {
 
-      modificarregistro.modificarregistro(id, numcliente, nombrecliente, maccpe, direccionip);
+      ModificarRegistro.modificarregistro(id, numcliente, nombrecliente, maccpe, direccionip);
       return new ResponseEntity<>(HttpStatus.OK);
     } else {
 
@@ -246,19 +292,34 @@ public class principal {
   }
 
   @Autowired
-  private UsuariosServices modificarusuario;
+  private UsuariosServices ModificarUsuario;
 
   @PostMapping(path = "modificarusuario")
   public ResponseEntity<String> modificarusuario(@RequestParam Boolean nivelacceso, String nombreusuario,
       String password) {
     if (nombreusuario instanceof String) {
 
-      modificarusuario.modificarusuario(nivelacceso, nombreusuario, password);
+      ModificarUsuario.modificarusuario(nivelacceso, nombreusuario, password);
       return new ResponseEntity<>(HttpStatus.OK);
     } else {
 
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
+
+  @Autowired
+  private ClientesServices ModificarCliente;
+
+  @PostMapping(path = "modificarcliente")
+  public ResponseEntity<String> modificarcliente(@RequestParam String nombrecliente, String nombreusuario,
+    String ciudad) {
+      if(nombrecliente instanceof String) {
+
+        ModificarCliente.modificarcliente(nombrecliente, nombreusuario, ciudad);
+        return new ResponseEntity<>(HttpStatus.OK);
+      } else {
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      }
+    }
 
 }

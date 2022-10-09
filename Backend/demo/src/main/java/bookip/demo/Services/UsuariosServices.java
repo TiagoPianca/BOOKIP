@@ -26,7 +26,7 @@ public interface UsuariosServices extends Usuarios {
     @Modifying
     @Transactional
     @Query(value = "UPDATE clientes SET nivelacceso = :nivelacceso, nombreusuario = :nombreusuario, password = :password, activo = :activo WHERE nombrecliente = :nombrecliente", nativeQuery = true)
-    void borrarusuario(@Param("activo") boolean activo);
+    void borrarusuario(@Param("nombreusuario") String nombreusuario,@Param("activo") boolean activo);
 
     @Modifying
     @Transactional

@@ -26,12 +26,12 @@ public interface RegistrosServices extends Registros {
     List<registros> buscarporip(@Param("ipabuscar") String ipabuscar);
 
     @Query(value = "SELECT * FROM registros WHERE activo like :activo", nativeQuery = true)
-    Iterable<registros> buscarregistrosactivos(@Param("activo") boolean activo);
+    List<registros> buscarregistrosactivos(@Param("activo") boolean activo);
 
     @Modifying
     @Transactional
     @Query(value = "UPDATE registros SET numcliente = :numcliente, nombrecliente = :nombrecliente, maccpe = :maccpe, direccionip = :direccionip, activo = :activo WHERE id = :id", nativeQuery = true)
-    void borrarregistro(@Param("activo") boolean activo);
+    void borrarregistro(@Param("nombrecliente") String nombrecliente, @Param("activo") Boolean activo);
 
     @Modifying
     @Transactional
