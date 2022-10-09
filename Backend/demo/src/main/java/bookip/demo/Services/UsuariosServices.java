@@ -20,6 +20,9 @@ public interface UsuariosServices extends Usuarios {
     @Query(value = "SELECT * FROM usuarios WHERE nombreusuario like :nombreusuario", nativeQuery = true)
     List<usuarios> buscarpornombreusuario(@Param("nombreusuario") String nombreusuario);
 
+    @Query(value = "SELECT * FROM usuarios WHERE activo like :activo", nativeQuery = true)
+    List<usuarios> buscarusersactivos(@Param("activo") Boolean activo);
+
     @Modifying
     @Transactional
     @Query(value = "UPDATE clientes SET nivelacceso = :nivelacceso, nombreusuario = :nombreusuario, password = :password, activo = :activo WHERE nombrecliente = :nombrecliente", nativeQuery = true)

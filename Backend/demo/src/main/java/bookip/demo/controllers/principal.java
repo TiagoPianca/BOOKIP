@@ -21,7 +21,7 @@ import bookip.demo.models.*;
 public class principal {
 
   //
-  // LISTADO DE TABLAS(REGISTROS, USUARIOS, CLIENTES)
+  // LISTADO DE TABLAS(REGISTROS, USUARIOS, CLIENTES) FUNCIONANDO
   //
 
   @Autowired
@@ -51,7 +51,7 @@ public class principal {
   }
 
   //
-  // ADD EN REGISTROS, USUARIOS Y CLIENTES
+  // AGREGAR REGISTROS (REGISTROS, USUARIOS Y CLIENTES) NO FUNCIONA, ERROR 500
   //
 
   @Autowired
@@ -94,7 +94,7 @@ public class principal {
   @Autowired
   private ClientesServices Clientesadd;
 
-  @PostMapping(path = "/agregarcliente")
+  @PostMapping(path = "agregarcliente")
   public String nuevoCliente(@RequestParam String nombrecliente, @RequestParam String nombreusuario,
       @RequestParam String ciudad, @RequestParam Boolean activo) {
 
@@ -109,7 +109,7 @@ public class principal {
   }
 
   //
-  // BUSQUEDAS EN TABLA REGISTROS
+  // BUSQUEDAS EN TABLA REGISTROS (BUSCARACTIVOS NO FUNCIONA, ERROR 404 )
   //
 
   @Autowired
@@ -148,8 +148,17 @@ public class principal {
     return BuscarMAC.buscarpormac(macabuscar);
   }
 
+  @Autowired
+  private RegistrosServices BuscarRegistrosActivos;
+
+  @PostMapping(path = "buscarregistrosactivos")
+  public Iterable<registros> buscarregistrosactivos(@RequestParam Boolean regactivosabuscar) {
+    Boolean activosabuscar = regactivosabuscar;
+    return BuscarRegistrosActivos.buscarregistrosactivos(activosabuscar);
+  }
+
   //
-  // BUSCAR EN TABLA USUARIOS
+  // BUSCAR EN TABLA USUARIOS( BUSCAR USERS NO FUNCIONA, ERROR 404)
   //
 
   @Autowired
@@ -160,6 +169,16 @@ public class principal {
     String usuarioabuscar = "%" + usuariotemp + "%";
     return BuscarUsuario.buscarpornombreusuario(usuarioabuscar);
   }
+
+  @Autowired
+  private UsuariosServices BuscarUsersActivos;
+
+  @PostMapping(path = "buscarusersactivos")
+  public List<usuarios> buscarusersactivos(@RequestParam Boolean usersactivo) {
+    Boolean activosabuscar = usersactivo;
+    return BuscarUsersActivos.buscarusersactivos(activosabuscar);
+  }
+
   //
   // LOGIN(SIN UTILIZAR POR EL MOMENTO)
   //
