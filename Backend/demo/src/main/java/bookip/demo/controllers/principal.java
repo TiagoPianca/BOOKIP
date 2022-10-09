@@ -109,7 +109,7 @@ public class principal {
   }
 
   //
-  // BUSQUEDAS EN TABLA REGISTROS (BUSCARACTIVOS NO FUNCIONA, ERROR 404 )
+  // BUSQUEDAS EN TABLA REGISTROS (BUSCARREGISTROSACTIVOS BUSCA PERO NO MUESTRA NADA )
   //
 
   @Autowired
@@ -153,12 +153,12 @@ public class principal {
 
   @PostMapping(path = "buscarregistrosactivos")
   public List<registros> buscarregistrosactivos(@RequestParam Boolean regactivos) {
-    Boolean activosabuscar = regactivos = true;
+    Boolean activosabuscar = regactivos;
     return BuscarRegistrosActivos.buscarregistrosactivos(activosabuscar);
   }
 
   //
-  // BUSCAR EN TABLA USUARIOS( BUSCAR USERS NO FUNCIONA, ERROR 404)
+  // BUSCAR EN TABLA USUARIOS(BUSCARUSERSACTIVOS BUSCA PERO NO MUESTRA)
   //
 
   @Autowired
@@ -175,12 +175,12 @@ public class principal {
 
   @PostMapping(path = "buscarusersactivos")
   public List<usuarios> buscarusersactivos(@RequestParam Boolean usersactivo) {
-    Boolean activosabuscar = usersactivo = true;
+    Boolean activosabuscar = usersactivo;
     return BuscarUsersActivos.buscarusersactivos(activosabuscar);
   }
 
   //
-  // BUSCAR EN TABLA CLIENTES (BUSCARPORCIUDAD NO FUNCIONA, ERROR 404)
+  // BUSCAR EN TABLA CLIENTES (BUSCARCLIENTES ACTIVOS BUSCA PERO NO MUESTRA)
   //
 
   @Autowired
@@ -206,7 +206,7 @@ public class principal {
 
   @PostMapping(path = "buscarclientesactivos")
   public List<clientes> buscarclientesactivos(@RequestParam Boolean clienteactivo) {
-    Boolean clienteabuscar = clienteactivo = true;
+    Boolean clienteabuscar = clienteactivo;
     return BuscarClientesActivos.buscarclientesactivos(clienteabuscar);
   }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-10-2022 a las 13:50:07
+-- Tiempo de generación: 09-10-2022 a las 17:08:12
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -31,7 +31,7 @@ CREATE TABLE `clientes` (
   `nombrecliente` varchar(100) NOT NULL,
   `nombreusuario` varchar(100) NOT NULL,
   `ciudad` varchar(100) NOT NULL,
-  `activo` bit(1) NOT NULL
+  `activo` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -57,7 +57,7 @@ CREATE TABLE `registros` (
   `numcliente` varchar(5) DEFAULT NULL,
   `maccpe` varchar(15) DEFAULT NULL,
   `direccionip` varchar(15) DEFAULT NULL,
-  `activo` bit(1) NOT NULL
+  `activo` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -70,7 +70,8 @@ INSERT INTO `registros` (`id`, `nombrecliente`, `numcliente`, `maccpe`, `direcci
 (3, 'Piancatelli Inc.', '021', '0012.25da.dade', '190.11.130.34', b'1'),
 (4, 'Di Miscia´s', '033', '0012.25da.dadl', '190.11.130.57', b'1'),
 (5, 'Britos S.R.L', '046', '0012.25da.dadr', '190.11.130.78', b'1'),
-(6, 'Piancatelli Inc.', '023', '0012.25da.dad', '190.11.130.38', b'1');
+(6, 'Piancatelli Inc.', '023', '0012.25da.dad', '190.11.130.38', b'0'),
+(7, 'Prueba 1 SRL', '065', '5845566', '190.2584', b'0');
 
 -- --------------------------------------------------------
 
@@ -83,7 +84,7 @@ CREATE TABLE `usuarios` (
   `nombreusuario` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `direccioncorreo` varchar(50) DEFAULT NULL,
-  `activo` bit(1) NOT NULL
+  `activo` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -129,7 +130,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `registros`
 --
 ALTER TABLE `registros`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas
@@ -139,7 +140,7 @@ ALTER TABLE `registros`
 -- Filtros para la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  ADD CONSTRAINT `fk_usuarios` FOREIGN KEY (`nombreusuario`) REFERENCES `usuarios` (`nombreUsuario`);
+  ADD CONSTRAINT `fk_usuarios` FOREIGN KEY (`nombreusuario`) REFERENCES `usuarios` (`nombreusuario`);
 
 --
 -- Filtros para la tabla `registros`

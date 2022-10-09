@@ -26,7 +26,7 @@ public interface RegistrosServices extends Registros {
     List<registros> buscarporip(@Param("ipabuscar") String ipabuscar);
 
     @Query(value = "SELECT * FROM registros WHERE activo like :activo", nativeQuery = true)
-    List<registros> buscarregistrosactivos(@Param("activo") boolean activo);
+    List<registros> buscarregistrosactivos(@Param("activo") Boolean activo);
 
     @Modifying
     @Transactional

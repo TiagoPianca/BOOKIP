@@ -24,7 +24,7 @@ public interface ClientesServices extends Clientes {
         List<clientes> buscarporciudad(@Param("ciudad") String ciudad);
 
         @Query(value = "SELECT * FROM clientes WHERE activo like :activo", nativeQuery = true)
-        List<clientes> buscarclientesactivos(@Param("activo") boolean activo);
+        List<clientes> buscarclientesactivos(@Param("activo") Boolean activo);
 
         @Modifying
         @Transactional
