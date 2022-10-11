@@ -31,7 +31,7 @@ public interface RegistrosServices extends Registros {
     @Modifying
     @Transactional
     @Query(value = "UPDATE registros SET numcliente = :numcliente, nombrecliente = :nombrecliente, maccpe = :maccpe, direccionip = :direccionip, activo = :activo WHERE id = :id", nativeQuery = true)
-    void borrarregistro(@Param("nombrecliente") String nombrecliente, @Param("activo") Boolean activo);
+    void borrarregistro(@Param("id") Integer id, @Param("activo") Boolean activo);
 
     @Modifying
     @Transactional

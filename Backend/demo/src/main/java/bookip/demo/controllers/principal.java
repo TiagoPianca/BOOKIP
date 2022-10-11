@@ -79,12 +79,13 @@ public class principal {
 
   @PostMapping(path = "agregarusuario")
   public String addNewUser(@RequestParam boolean nivelacceso,
-      @RequestParam String nombreusuario, @RequestParam String password, @RequestParam Boolean activo) {
+      @RequestParam String nombreusuario, @RequestParam String password, @RequestParam Boolean activo, @RequestParam String direccioncorreo) {
 
     usuarios agregar = new usuarios();
     agregar.setNombreusuario(nombreusuario);
     agregar.setPassword(password);
     agregar.setNivelacceso(nivelacceso);
+    agregar.setDireccioncorreo(direccioncorreo);
     agregar.setActivo(activo = true);
 
     Usuariosadd.save(agregar);
@@ -180,7 +181,7 @@ public class principal {
   }
 
   //
-  // BUSCAR EN TABLA CLIENTES (BUSCARCLIENTES ACTIVOS BUSCA PERO NO MUESTRA)
+  // BUSCAR EN TABLA CLIENTES (BUSCARCLIENTESACTIVOS BUSCA PERO NO MUESTRA)
   //
 
   @Autowired
@@ -223,17 +224,17 @@ public class principal {
   }
 
   //
-  // ELIMINAR REGISTROS, USUARIOS Y CLIENTES
+  // ELIMINAR REGISTROS, USUARIOS Y CLIENTES (ERROR 500)
   //
 
   @Autowired
   private RegistrosServices BorrarRegistro;
 
   @PostMapping(path = "borrarregistro")
-  public ResponseEntity<String> borrarregistro(@RequestParam String nombrecliente, @RequestParam Boolean activo) {
-    if (nombrecliente instanceof String) {
+  public ResponseEntity<Integer> borrarregistro(@RequestParam Integer id, @RequestParam Boolean activo) {
+    if (id instanceof Integer) {
 
-      BorrarRegistro.borrarregistro(nombrecliente,activo);
+      BorrarRegistro.borrarregistro(id,activo);
       return new ResponseEntity<>(HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -248,7 +249,7 @@ public class principal {
   public ResponseEntity<String> borrarusuario(@RequestParam String nombreusuario, Boolean activo) {
     if (nombreusuario instanceof String) {
 
-      BorrarUsuario.borrarusuario(nombreusuario, activo );
+      BorrarUsuario.borrarusuario(nombreusuario, activo);
       return new ResponseEntity<>(HttpStatus.OK);
     } else {
 
@@ -296,10 +297,10 @@ public class principal {
 
   @PostMapping(path = "modificarusuario")
   public ResponseEntity<String> modificarusuario(@RequestParam Boolean nivelacceso, String nombreusuario,
-      String password) {
+      String password, @RequestParam String direccioncorreo) {
     if (nombreusuario instanceof String) {
 
-      ModificarUsuario.modificarusuario(nivelacceso, nombreusuario, password);
+      ModificarUsuario.modificarusuario(nivelacceso, nombreusuario, password, direccioncorreo);
       return new ResponseEntity<>(HttpStatus.OK);
     } else {
 
