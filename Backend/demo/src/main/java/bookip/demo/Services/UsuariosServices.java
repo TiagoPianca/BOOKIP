@@ -9,11 +9,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-import bookip.demo.Repository.Usuarios;
+import bookip.demo.Repository.UsuariosRepository;
 import bookip.demo.models.usuarios;
 
 @Service
-public interface UsuariosServices extends Usuarios {
+public interface UsuariosServices extends UsuariosRepository {
     @Query(value = "SELECT * FROM usuarios WHERE nombreusuario like :nombreusuario AND password like :password", nativeQuery = true)
     List<usuarios> login(@Param("nombreusuario") String nombreusuario, @Param("password") String password);
 

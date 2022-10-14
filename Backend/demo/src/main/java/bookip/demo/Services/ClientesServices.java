@@ -8,11 +8,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import bookip.demo.Repository.Clientes;
+import bookip.demo.Repository.ClientesRepository;
 import bookip.demo.models.clientes;
 
 @Service
-public interface ClientesServices extends Clientes {
+public interface ClientesServices extends ClientesRepository {
 
         @Query(value = "SELECT * FROM clientes WHERE nombrecliente like :nombrecliente", nativeQuery = true)
         List<clientes> buscarpornombrecliente(@Param("nombrecliente") String nombrecliente);

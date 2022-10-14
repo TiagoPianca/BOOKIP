@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import bookip.demo.Repository.Registros;
+import bookip.demo.Repository.RegistrosRepository;
 import bookip.demo.models.registros;
 
 @Service
-public interface RegistrosServices extends Registros {
+public interface RegistrosServices extends RegistrosRepository {
 
     @Query(value = "SELECT * FROM registros WHERE nombrecliente like :nombreabuscar", nativeQuery = true)
     List<registros> buscarpornombre(@Param("nombreabuscar") String nombreabuscar);
@@ -36,8 +36,11 @@ public interface RegistrosServices extends Registros {
     @Modifying
     @Transactional
     @Query(value = "UPDATE registros SET numcliente = :numcliente, nombrecliente = :nombrecliente, maccpe = :maccpe, direccionip = :direccionip WHERE id = :id", nativeQuery = true)
-    void modificarregistro(@Param("id") Long id, @Param("numcliente") String numcliente,
+    void modificarregistro(@Param("id") Integer id, @Param("numcliente") String numcliente,
             @Param("nombrecliente") String nombrecliente, @Param("maccpe") String maccpe,
             @Param("direccionip") String direccionip);
+
+    
+            
 
 }
