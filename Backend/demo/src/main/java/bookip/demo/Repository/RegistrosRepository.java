@@ -5,8 +5,8 @@ package bookip.demo.Repository;
 //import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
-import bookip.demo.models.registros;
+import bookip.demo.models.Registros;
 
-public interface RegistrosRepository extends CrudRepository<registros, Integer> {
+public interface RegistrosRepository extends CrudRepository<Registros, Integer> {
 
 }

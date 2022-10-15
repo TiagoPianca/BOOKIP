@@ -9,22 +9,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import bookip.demo.Repository.ClientesRepository;
-import bookip.demo.models.clientes;
+import bookip.demo.models.Clientes;
 
 @Service
 public interface ClientesServices extends ClientesRepository {
 
         @Query(value = "SELECT * FROM clientes WHERE nombrecliente like :nombrecliente", nativeQuery = true)
-        List<clientes> buscarpornombrecliente(@Param("nombrecliente") String nombrecliente);
+        List<Clientes> buscarpornombrecliente(@Param("nombrecliente") String nombrecliente);
 
         @Query(value = "SELECT * FROM clientes WHERE nombreusuario like :nombreusuario", nativeQuery = true)
-        List<clientes> buscarporusuario(@Param("nombreusuario") String nombreusuario);
+        List<Clientes> buscarporusuario(@Param("nombreusuario") String nombreusuario);
 
         @Query(value = "SELECT * FROM clientes WHERE ciudad like :ciudad", nativeQuery = true)
-        List<clientes> buscarporciudad(@Param("ciudad") String ciudad);
+        List<Clientes> buscarporciudad(@Param("ciudad") String ciudad);
 
         @Query(value = "SELECT * FROM clientes WHERE activo like :activo", nativeQuery = true)
-        List<clientes> buscarclientesactivos(@Param("activo") Boolean activo);
+        List<Clientes> buscarclientesactivos(@Param("activo") Boolean activo);
 
         @Modifying
         @Transactional

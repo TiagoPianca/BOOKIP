@@ -6,13 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-//import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import bookip.demo.Repository.RegistrosRepository;
+//import bookip.demo.Repository.RegistrosRepository;
 import bookip.demo.Services.*;
 import bookip.demo.models.*;
 //import bookip.demo.Repository.*;
@@ -30,10 +32,8 @@ public class principal {
 
   private RegistrosServices RegistrosService;
 
- 
-
   @GetMapping(path = "listarregistros")
-  public Iterable<registros> mostrarregistros() {
+  public Iterable<Registros> mostrarregistros() {
     return RegistrosService.findAll();
   }
 
@@ -41,7 +41,7 @@ public class principal {
   private UsuariosServices UsuariosService;
 
   @GetMapping(path = "listarusuarios")
-  public Iterable<usuarios> mostrarusuarios() {
+  public Iterable<Usuarios> mostrarusuarios() {
     return UsuariosService.findAll();
 
   }
@@ -50,7 +50,7 @@ public class principal {
   private ClientesServices ClientesService;
 
   @GetMapping(path = "listarclientes")
-  public Iterable<clientes> mostrarclientes() {
+  public Iterable<Clientes> mostrarclientes() {
     return ClientesService.findAll();
   }
 
@@ -59,49 +59,37 @@ public class principal {
   //
 
   @PostMapping(path = "agregarregistro")
-  public String addNewRegistro(@RequestParam String numcliente,
-      @RequestParam String nombrecliente, @RequestParam String maccpe, @RequestParam String direccionip,
-      @RequestParam Boolean activo) {
+  public String addNewRegistro(@RequestBody Registros registros) {
 
-    registros agregar = new registros();
-    agregar.setNumcliente(numcliente);
-    agregar.setNombrecliente(nombrecliente);
-    agregar.setMaccpe(maccpe);
-    agregar.setDireccionip(direccionip);
-    agregar.setActivo(activo);
-
-   RegistrosService.save(agregar);
-  // Registrorepository.save(agregar);
+    registros.setNumcliente(null);
+    registros.setNombrecliente(null);
+    registros.setMaccpe(null);
+    registros.setDireccionip(null);
+    registros.setActivo(null);
+    RegistrosService.save(registros);
+    // Registrorepository.save(agregar);
     return "Registro guardado exitosamente";
   }
 
-
   @PostMapping(path = "agregarusuario")
-  public String addNewUser(@RequestParam boolean nivelacceso,
-      @RequestParam String nombreusuario, @RequestParam String password, @RequestParam Boolean activo, @RequestParam String direccioncorreo) {
-
-    usuarios agregar = new usuarios();
-    agregar.setNombreusuario(nombreusuario);
-    agregar.setPassword(password);
-    agregar.setNivelacceso(nivelacceso);
-    agregar.setDireccioncorreo(direccioncorreo);
-    agregar.setActivo(activo = true);
-
-    UsuariosService.save(agregar);
+  public String addNewUsuario(@RequestBody Usuarios usuarios) {
+    usuarios.setNivelacceso(null);
+    usuarios.setNombreusuario(null);
+    usuarios.setPassword(null);
+    usuarios.setDireccioncorreo(null);
+    usuarios.setActivo(null);
+        UsuariosService.save(usuarios);
     return "Usuario guardado exitosamente";
   }
 
   @PostMapping(path = "agregarcliente")
-  public String nuevoCliente(@RequestParam String nombrecliente, @RequestParam String nombreusuario,
-      @RequestParam String ciudad, @RequestParam Boolean activo) {
+  public String addNewCliente(@RequestBody Clientes clientes) {
+    clientes.setNombrecliente(null);
+    clientes.setNombreusuario(null);
+    clientes.setCiudad(null);
+    clientes.setActivo(null);
 
-    clientes agregar = new clientes();
-    agregar.setNombrecliente(nombrecliente);
-    agregar.setNombreusuario(nombreusuario);
-    agregar.setCiudad(ciudad);
-    agregar.setActivo(activo = true);
-
-    ClientesService.save(agregar);
+    ClientesService.save(clientes);
     return "CLiente guardado exitosamente";
   }
 
@@ -109,32 +97,32 @@ public class principal {
   // BUSQUEDAS EN TABLA REGISTROS (BUSCARREGISTROSACTIVOS BUSCA PERO NO MUESTRA NADA )
   //
 
-  @PostMapping(path = "buscarpornombre")
-  public List<registros> buscarpornombre(@RequestParam String nombreabuscartemp) {
+  @GetMapping(path = "buscarpornombre")
+  public List<Registros> buscarpornombre(@RequestParam String nombreabuscartemp) {
     String nombreabuscar = "%" + nombreabuscartemp + "%";
     return RegistrosService.buscarpornombre(nombreabuscar);
   }
 
-  @PostMapping(path = "buscarpornumcliente")
-  public List<registros> buscarpornumcliente(@RequestParam String numeroabuscartemp) {
+  @GetMapping(path = "buscarpornumcliente")
+  public List<Registros> buscarpornumcliente(@RequestParam String numeroabuscartemp) {
     String numabuscar = "%" + numeroabuscartemp + "%";
     return RegistrosService.buscarpornumcliente(numabuscar);
   }
 
-  @PostMapping(path = "buscarporip")
-  public List<registros> buscarporip(@RequestParam String ipabuscartemp) {
+  @GetMapping(path = "buscarporip")
+  public List<Registros> buscarporip(@RequestParam String ipabuscartemp) {
     String ipabuscar = "%" + ipabuscartemp + "%";
     return RegistrosService.buscarporip(ipabuscar);
   }
 
-  @PostMapping(path = "buscarpormac")
-  public List<registros> buscarpormac(@RequestParam String macabuscartemp) {
+  @GetMapping(path = "buscarpormac")
+  public List<Registros> buscarpormac(@RequestParam String macabuscartemp) {
     String macabuscar = "%" + macabuscartemp + "%";
     return RegistrosService.buscarpormac(macabuscar);
   }
 
-  @PostMapping(path = "buscarregistrosactivos")
-  public List<registros> buscarregistrosactivos(@RequestParam Boolean regactivos) {
+  @GetMapping(path = "buscarregistrosactivos")
+  public List<Registros> buscarregistrosactivos(@RequestParam Boolean regactivos) {
     Boolean activosabuscar = regactivos;
     return RegistrosService.buscarregistrosactivos(activosabuscar);
   }
@@ -143,14 +131,14 @@ public class principal {
   // BUSCAR EN TABLA USUARIOS(BUSCARUSERSACTIVOS BUSCA PERO NO MUESTRA)
   //
 
-  @PostMapping(path = "buscarpornombreusuario")
-  public List<usuarios> buscarpornombreusuario(@RequestParam String usuariotemp) {
+  @GetMapping(path = "buscarpornombreusuario")
+  public List<Usuarios> buscarpornombreusuario(@RequestParam String usuariotemp) {
     String usuarioabuscar = "%" + usuariotemp + "%";
     return UsuariosService.buscarpornombreusuario(usuarioabuscar);
   }
 
-  @PostMapping(path = "buscarusersactivos")
-  public List<usuarios> buscarusersactivos(@RequestParam Boolean usersactivo) {
+  @GetMapping(path = "buscarusersactivos")
+  public List<Usuarios> buscarusersactivos(@RequestParam Boolean usersactivo) {
     Boolean activosabuscar = usersactivo;
     return UsuariosService.buscarusersactivos(activosabuscar);
   }
@@ -159,20 +147,20 @@ public class principal {
   // BUSCAR EN TABLA CLIENTES (BUSCARCLIENTESACTIVOS BUSCA PERO NO MUESTRA)
   //
 
-  @PostMapping(path = "buscarclientes")
-  public List<clientes> buscarcliente(@RequestParam String nombreclientetemp) {
+  @GetMapping(path = "buscarclientes")
+  public List<Clientes> buscarcliente(@RequestParam String nombreclientetemp) {
     String clienteabuscar = "%" + nombreclientetemp + "%";
     return ClientesService.buscarpornombrecliente(clienteabuscar);
   }
 
-  @PostMapping(path = "buscarporciudad")
-  public List<clientes> buscarciudad(@RequestParam String ciudadtemp) {
+  @GetMapping(path = "buscarporciudad")
+  public List<Clientes> buscarciudad(@RequestParam String ciudadtemp) {
     String ciudadabuscar = "%" + ciudadtemp + "%";
     return ClientesService.buscarporciudad(ciudadabuscar);
   }
 
-  @PostMapping(path = "buscarclientesactivos")
-  public List<clientes> buscarclientesactivos(@RequestParam Boolean clienteactivo) {
+  @GetMapping(path = "buscarclientesactivos")
+  public List<Clientes> buscarclientesactivos(@RequestParam Boolean clienteactivo) {
     Boolean clienteabuscar = clienteactivo;
     return ClientesService.buscarclientesactivos(clienteabuscar);
   }
@@ -180,21 +168,22 @@ public class principal {
   //
   // LOGIN(SIN UTILIZAR POR EL MOMENTO)
   //
-/*
-  @PostMapping(path = "login")
-  public List<usuarios> login(@RequestParam String nombreusuario, String password) {
-    return UsuariosService.login(nombreusuario, password);
-  }
- */
+  /*
+   * @PostMapping(path = "login")
+   * public List<usuarios> login(@RequestParam String nombreusuario, String
+   * password) {
+   * return UsuariosService.login(nombreusuario, password);
+   * }
+   */
   //
   // ELIMINAR REGISTROS, USUARIOS Y CLIENTES (ERROR 500)
   //
 
-  @PostMapping(path = "borrarregistro")
-  public ResponseEntity<Integer> borrarregistro(@RequestParam Integer id, @RequestParam Boolean activo) {
+  @PatchMapping(path = "borrarregistro")
+  public ResponseEntity<Integer> borrarregistro(@PathVariable Integer id, @PathVariable Boolean activo) {
     if (id instanceof Integer) {
 
-      RegistrosService.borrarregistro(id,activo);
+      RegistrosService.borrarregistro(id, activo);
       return new ResponseEntity<>(HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -216,11 +205,11 @@ public class principal {
 
   @PostMapping(path = "borrarcliente")
   public ResponseEntity<String> borrarcliente(@RequestParam String nombrecliente, Boolean activo) {
-    if(nombrecliente instanceof String) {
+    if (nombrecliente instanceof String) {
 
       ClientesService.borrarcliente(nombrecliente, activo);
       return new ResponseEntity<>(HttpStatus.OK);
-    }else {
+    } else {
 
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
@@ -258,14 +247,14 @@ public class principal {
 
   @PostMapping(path = "modificarcliente")
   public ResponseEntity<String> modificarcliente(@RequestParam String nombrecliente, String nombreusuario,
-    String ciudad) {
-      if(nombrecliente instanceof String) {
+      String ciudad) {
+    if (nombrecliente instanceof String) {
 
-        ClientesService.modificarcliente(nombrecliente, nombreusuario, ciudad);
-        return new ResponseEntity<>(HttpStatus.OK);
-      } else {
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-      }
+      ClientesService.modificarcliente(nombrecliente, nombreusuario, ciudad);
+      return new ResponseEntity<>(HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+  }
 
 }

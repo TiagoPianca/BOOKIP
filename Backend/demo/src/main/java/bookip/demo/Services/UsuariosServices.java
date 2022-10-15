@@ -10,18 +10,18 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import bookip.demo.Repository.UsuariosRepository;
-import bookip.demo.models.usuarios;
+import bookip.demo.models.Usuarios;
 
 @Service
 public interface UsuariosServices extends UsuariosRepository {
     @Query(value = "SELECT * FROM usuarios WHERE nombreusuario like :nombreusuario AND password like :password", nativeQuery = true)
-    List<usuarios> login(@Param("nombreusuario") String nombreusuario, @Param("password") String password);
+    List<Usuarios> login(@Param("nombreusuario") String nombreusuario, @Param("password") String password);
 
     @Query(value = "SELECT * FROM usuarios WHERE nombreusuario like :nombreusuario", nativeQuery = true)
-    List<usuarios> buscarpornombreusuario(@Param("nombreusuario") String nombreusuario);
+    List<Usuarios> buscarpornombreusuario(@Param("nombreusuario") String nombreusuario);
 
     @Query(value = "SELECT * FROM usuarios WHERE activo like :activo", nativeQuery = true)
-    List<usuarios> buscarusersactivos(@Param("activo") Boolean activo);
+    List<Usuarios> buscarusersactivos(@Param("activo") Boolean activo);
 
     @Modifying
     @Transactional

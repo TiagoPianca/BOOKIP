@@ -8,25 +8,25 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import bookip.demo.Repository.RegistrosRepository;
-import bookip.demo.models.registros;
+import bookip.demo.models.Registros;
 
 @Service
 public interface RegistrosServices extends RegistrosRepository {
 
     @Query(value = "SELECT * FROM registros WHERE nombrecliente like :nombreabuscar", nativeQuery = true)
-    List<registros> buscarpornombre(@Param("nombreabuscar") String nombreabuscar);
+    List<Registros> buscarpornombre(@Param("nombreabuscar") String nombreabuscar);
 
     @Query(value = "SELECT * FROM registros WHERE numcliente like :numabuscar", nativeQuery = true)
-    List<registros> buscarpornumcliente(@Param("numabuscar") String numabuscar);
+    List<Registros> buscarpornumcliente(@Param("numabuscar") String numabuscar);
 
     @Query(value = "SELECT * FROM registros WHERE maccpe like :macabuscar", nativeQuery = true)
-    List<registros> buscarpormac(@Param("macabuscar") String macabuscar);
+    List<Registros> buscarpormac(@Param("macabuscar") String macabuscar);
 
     @Query(value = "SELECT * FROM registros WHERE direccionip like :ipabuscar", nativeQuery = true)
-    List<registros> buscarporip(@Param("ipabuscar") String ipabuscar);
+    List<Registros> buscarporip(@Param("ipabuscar") String ipabuscar);
 
-    @Query(value = "SELECT * FROM registros WHERE activo like :activo", nativeQuery = true)
-    List<registros> buscarregistrosactivos(@Param("activo") Boolean activo);
+    @Query(value = "SELECT * FROM registros WHERE activo like :activos", nativeQuery = true)
+    List<Registros> buscarregistrosactivos(@Param("activos") Boolean activos);
 
     @Modifying
     @Transactional

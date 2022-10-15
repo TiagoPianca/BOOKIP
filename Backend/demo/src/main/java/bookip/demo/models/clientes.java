@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "clientes")
-public class clientes {
+public class Clientes {
 
     @Id
     @GeneratedValue
