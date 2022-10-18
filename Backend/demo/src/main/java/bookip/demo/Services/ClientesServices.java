@@ -14,17 +14,13 @@ import bookip.demo.models.Clientes;
 @Service
 public interface ClientesServices extends ClientesRepository {
 
-        @Query(value = "SELECT * FROM clientes WHERE nombrecliente like :nombrecliente", nativeQuery = true)
-        List<Clientes> buscarpornombrecliente(@Param("nombrecliente") String nombrecliente);
+        List<Clientes> findByNombrecliente(String nombrecliente);
 
-        @Query(value = "SELECT * FROM clientes WHERE nombreusuario like :nombreusuario", nativeQuery = true)
-        List<Clientes> buscarporusuario(@Param("nombreusuario") String nombreusuario);
+        //List<Clientes> findByNombreusuario(String nombreusuario);
 
-        @Query(value = "SELECT * FROM clientes WHERE ciudad like :ciudad", nativeQuery = true)
-        List<Clientes> buscarporciudad(@Param("ciudad") String ciudad);
+        List<Clientes> findByCiudad(String ciudad);
 
-        @Query(value = "SELECT * FROM clientes WHERE activo like :activo", nativeQuery = true)
-        List<Clientes> buscarclientesactivos(@Param("activo") Boolean activo);
+        List<Clientes> findByActivo(Boolean activo);
 
         @Modifying
         @Transactional

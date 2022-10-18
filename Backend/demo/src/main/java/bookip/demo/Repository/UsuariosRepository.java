@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import bookip.demo.models.Usuarios;
 
 public interface UsuariosRepository extends CrudRepository<Usuarios, Long> {
-
+    
 }

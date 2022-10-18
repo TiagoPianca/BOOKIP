@@ -14,14 +14,14 @@ import bookip.demo.models.Usuarios;
 
 @Service
 public interface UsuariosServices extends UsuariosRepository {
+    
     @Query(value = "SELECT * FROM usuarios WHERE nombreusuario like :nombreusuario AND password like :password", nativeQuery = true)
     List<Usuarios> login(@Param("nombreusuario") String nombreusuario, @Param("password") String password);
 
     @Query(value = "SELECT * FROM usuarios WHERE nombreusuario like :nombreusuario", nativeQuery = true)
     List<Usuarios> buscarpornombreusuario(@Param("nombreusuario") String nombreusuario);
 
-    @Query(value = "SELECT * FROM usuarios WHERE activo like :activo", nativeQuery = true)
-    List<Usuarios> buscarusersactivos(@Param("activo") Boolean activo);
+    List<Usuarios> findByActivo(Boolean activo);
 
     @Modifying
     @Transactional

@@ -1,5 +1,7 @@
 package bookip.demo.Repository;
 
+import java.util.List;
+
 //import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
@@ -7,5 +9,5 @@ import bookip.demo.models.Clientes;
 //import java.util.List;
 
 public interface ClientesRepository extends CrudRepository<Clientes, Long> {
-
+    List<Clientes> findByActivo(Boolean activo);
 }

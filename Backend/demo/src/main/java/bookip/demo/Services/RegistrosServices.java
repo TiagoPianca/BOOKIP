@@ -13,20 +13,15 @@ import bookip.demo.models.Registros;
 @Service
 public interface RegistrosServices extends RegistrosRepository {
 
-    @Query(value = "SELECT * FROM registros WHERE nombrecliente like :nombreabuscar", nativeQuery = true)
-    List<Registros> buscarpornombre(@Param("nombreabuscar") String nombreabuscar);
+    List<Registros> findByNombrecliente(String nombrecliente);
 
-    @Query(value = "SELECT * FROM registros WHERE numcliente like :numabuscar", nativeQuery = true)
-    List<Registros> buscarpornumcliente(@Param("numabuscar") String numabuscar);
+    List<Registros> findByNumcliente(String numcliente);
 
-    @Query(value = "SELECT * FROM registros WHERE maccpe like :macabuscar", nativeQuery = true)
-    List<Registros> buscarpormac(@Param("macabuscar") String macabuscar);
+    List<Registros> findByMaccpe(String maccpe);
 
-    @Query(value = "SELECT * FROM registros WHERE direccionip like :ipabuscar", nativeQuery = true)
-    List<Registros> buscarporip(@Param("ipabuscar") String ipabuscar);
+    List<Registros> findByDireccionip(String direccionip);
 
-    @Query(value = "SELECT * FROM registros WHERE activo like :activo", nativeQuery = true)
-    List<Registros> buscarregistrosactivos(@Param("activo") Boolean activo);
+    List<Registros> findByActivo(Boolean activo);
 
     @Modifying
     @Transactional
