@@ -1,33 +1,26 @@
 package bookip.demo.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.*;
 
+@Data
 @Entity
 @Table(name = "usuarios")
 public class Usuarios {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
-    @Getter
-    @Setter
-    private String direccioncorreo;
-    @Getter
-    @Setter
+    @Column
     private String nombreusuario;
-    @Getter
-    @Setter
+    @Column
+    private String direccioncorreo;
+    @Column
     private String password;
-    @Getter
-    @Setter
+    @Column
     private Boolean nivelacceso;
-    @Getter
-    @Setter
+    @Column
     private Boolean activo;
 
 }

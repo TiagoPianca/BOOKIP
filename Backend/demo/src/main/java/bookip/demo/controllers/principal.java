@@ -55,40 +55,26 @@ public class principal {
   }
 
   //
-  // AGREGAR REGISTROS (REGISTROS, USUARIOS Y CLIENTES) NO FUNCIONA, ERROR 500
+  // ADD REGISTROS, USUARIOS Y CLIENTES
   //
 
-  @PostMapping(path = "agregarregistro")
+  @PostMapping("/agregarreg")
   public String addNewRegistro(@RequestBody Registros registros) {
 
-    registros.setNumcliente(null);
-    registros.setNombrecliente(null);
-    registros.setMaccpe(null);
-    registros.setDireccionip(null);
-    registros.setActivo(null);
     RegistrosService.save(registros);
-    // Registrorepository.save(agregar);
     return "Registro guardado exitosamente";
   }
 
-  @PostMapping(path = "agregarusuario")
+  @PostMapping(path = "/agregaruser")
   public String addNewUsuario(@RequestBody Usuarios usuarios) {
-    usuarios.setNivelacceso(null);
-    usuarios.setNombreusuario(null);
-    usuarios.setPassword(null);
-    usuarios.setDireccioncorreo(null);
-    usuarios.setActivo(null);
-        UsuariosService.save(usuarios);
+    
+    UsuariosService.save(usuarios);
     return "Usuario guardado exitosamente";
   }
 
-  @PostMapping(path = "agregarcliente")
+  @PostMapping(path = "/agregarcli")
   public String addNewCliente(@RequestBody Clientes clientes) {
-    clientes.setNombrecliente(null);
-    clientes.setNombreusuario(null);
-    clientes.setCiudad(null);
-    clientes.setActivo(null);
-
+   
     ClientesService.save(clientes);
     return "CLiente guardado exitosamente";
   }

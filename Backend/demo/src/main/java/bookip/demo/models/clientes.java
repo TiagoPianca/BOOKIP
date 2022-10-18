@@ -1,33 +1,24 @@
 package bookip.demo.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@Data
 @Entity
 @Table(name = "clientes")
 public class Clientes {
 
     @Id
-    @GeneratedValue
-
-    @Getter
-    @Setter
+    @Column
     private String nombrecliente;
-
-    @Getter
-    @Setter
+    @Column
     private String nombreusuario;
-
-    @Getter
-    @Setter
+    @Column
     private String ciudad;
-
-    @Getter
-    @Setter
+    @Column
     private Boolean activo;
 }
