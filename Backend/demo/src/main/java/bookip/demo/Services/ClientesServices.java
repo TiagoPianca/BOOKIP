@@ -29,9 +29,9 @@ public interface ClientesServices extends ClientesRepository {
 
         @Modifying
         @Transactional
-        @Query(value = "UPDATE clientes SET nombrecliente = :nombrecliente, nombreusuario = :nombreusuario, ciudad = :ciudad, activo = :activo WHERE nombrecliente = :nombrecliente", nativeQuery = true)
+        @Query(value = "UPDATE clientes SET nombrecliente = :nombrecliente, nombreusuario = :nombreusuario, ciudad = :ciudad WHERE nombrecliente = :nombrecliente", nativeQuery = true)
         void modificarcliente(@Param("nombrecliente") String nombrecliente,
                         @Param("nombreusuario") String nombreusuario,
-                        @Param("ciudad") String ciudad, @Param("activo") Boolean activo);
+                        @Param("ciudad") String ciudad);
 
 }

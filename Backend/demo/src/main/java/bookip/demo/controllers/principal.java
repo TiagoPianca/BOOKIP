@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bookip.demo.Services.*;
 import bookip.demo.models.*;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -177,33 +178,25 @@ public class principal {
   // MODIFICACION DE REGISTROS, USUARIOS Y CLIENTES
   //
 
-  @PostMapping("/modificarregistro/{id}")
-  public @ResponseBody String modificarregistro(@PathVariable Integer id, @RequestParam String numcliente,
+  @PutMapping(value = "/modificarregistro")
+  public String modificarregistro(@RequestParam Integer id, @RequestParam String numcliente,
       @RequestParam String nombrecliente, @RequestParam String maccpe, @RequestParam String direccionip) {
-    RegistrosService.modificarregistro(id,numcliente, nombrecliente, maccpe, direccionip);
+
+    RegistrosService.modificarregistro(id, numcliente, nombrecliente, maccpe, direccionip);
     return "Registro modificado";
   }
 
-  // @PostMapping("/modificarusuario/{nombreusuario}")
-  // public @ResponseBody String modificarusuario(@PathVariable String
-  // nombreusuario) {
+  @PutMapping(value = "/modificarusuario")
+  public String modificarusuario(@RequestParam String nombreusuario, @RequestParam String password, @RequestParam String direccioncorreo, @RequestParam Boolean nivelacceso){
+    UsuariosService.modificarusuario(nivelacceso, nombreusuario, password, direccioncorreo);
+    return "Usuario modificado";
+  }
 
-  // UsuariosService.modificarusuario(null, nombreusuario, nombreusuario,
-  // nombreusuario, null);;
-  // return "Usuario modificado";
-  // }
+  @PutMapping(value="/modificarcliente")
+  public String modificarcliente(@RequestParam String nombrecliente, @RequestParam String nombreusuario, @RequestParam String ciudad) {
+      ClientesService.modificarcliente(nombrecliente, nombreusuario, ciudad);
+      return "Cliente modificado";
+  }
 
-  // @PostMapping(path = "modificarcliente")
-  // public ResponseEntity<String> modificarcliente(@RequestParam String
-  // nombrecliente, String nombreusuario,
-  // String ciudad) {
-  // if (nombrecliente instanceof String) {
-
-  // ClientesService.modificarcliente(nombrecliente, nombreusuario, ciudad);
-  // return new ResponseEntity<>(HttpStatus.OK);
-  // } else {
-  // return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-  // }
-  // }
 
 }
