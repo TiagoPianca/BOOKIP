@@ -105,7 +105,7 @@ public class principal {
   }
 
   //
-  // BUSCAR EN TABLA USUARIOS(BUSCARUSERSACTIVOS BUSCA PERO NO MUESTRA)
+  // BUSCAR EN TABLA USUARIOS
   //
 
   @GetMapping(path = "buscarpornombreusuario")
@@ -141,6 +141,7 @@ public class principal {
   //
   // LOGIN(SIN UTILIZAR POR EL MOMENTO)
   //
+
   /*
    * @PostMapping(path = "login")
    * public List<usuarios> login(@RequestParam String nombreusuario, String
@@ -148,8 +149,9 @@ public class principal {
    * return UsuariosService.login(nombreusuario, password);
    * }
    */
+
   //
-  // ELIMINAR REGISTROS, USUARIOS Y CLIENTES (ERROR 500)
+  // ELIMINAR REGISTROS, USUARIOS Y CLIENTES FUNCIONANDO
   //
 
   @PostMapping("/borrarregistro/{id}")
@@ -166,7 +168,7 @@ public class principal {
   }
 
   @PostMapping("/borrarcliente/{nombrecliente}")
-  public @ResponseBody String borrarcliente(@RequestParam String nombrecliente) {
+  public @ResponseBody String borrarcliente(@PathVariable String nombrecliente) {
     ClientesService.borrarcliente(nombrecliente, false);
     return "Cliente eliminado";
   }
@@ -176,10 +178,9 @@ public class principal {
   //
 
   @PostMapping("/modificarregistro/{id}")
-  public @ResponseBody String modificarregistro(@RequestParam Integer id, @RequestParam String numcliente,
-      @RequestParam String nombrecliente, @RequestParam String maccpe, @RequestParam String direccionip,
-      @RequestParam Boolean activo) {
-    RegistrosService.modificarregistro(id, numcliente, nombrecliente, maccpe, direccionip, true);
+  public @ResponseBody String modificarregistro(@PathVariable Integer id, @RequestParam String numcliente,
+      @RequestParam String nombrecliente, @RequestParam String maccpe, @RequestParam String direccionip) {
+    RegistrosService.modificarregistro(id,numcliente, nombrecliente, maccpe, direccionip);
     return "Registro modificado";
   }
 
