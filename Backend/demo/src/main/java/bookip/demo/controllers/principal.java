@@ -3,22 +3,17 @@ package bookip.demo.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-//import bookip.demo.Repository.RegistrosRepository;
 import bookip.demo.Services.*;
 import bookip.demo.models.*;
-//import bookip.demo.Repository.*;
-import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -157,89 +152,57 @@ public class principal {
   // ELIMINAR REGISTROS, USUARIOS Y CLIENTES (ERROR 500)
   //
 
-  @PatchMapping(path = "borrarregistro")
-  public ResponseEntity<Integer> borrarregistro(@PathVariable Integer id, @PathVariable Boolean activo) {
-    if (id instanceof Integer) {
-
-      RegistrosService.borrarregistro(id, activo);
-      return new ResponseEntity<>(HttpStatus.OK);
-    } else {
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
+  @PostMapping("/borrarregistro/{id}")
+  public @ResponseBody String borrarregistro(@PathVariable Integer id) {
+    RegistrosService.borrarregistro(id, false);
+    return "Registro eliminado";
 
   }
 
-  @PostMapping(path = "borrarusuario")
-  public ResponseEntity<String> borrarusuario(@RequestParam String nombreusuario, Boolean activo) {
-    if (nombreusuario instanceof String) {
-
-      UsuariosService.borrarusuario(nombreusuario, activo);
-      return new ResponseEntity<>(HttpStatus.OK);
-    } else {
-
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
+  @PostMapping("/borrarusuario/{nombreusuario}")
+  public @ResponseBody String borrarusuario(@PathVariable String nombreusuario) {
+    UsuariosService.borrarusuario(nombreusuario, false);
+    return "Usuario eliminado";
   }
 
-  @PostMapping(path = "borrarcliente")
-  public ResponseEntity<String> borrarcliente(@RequestParam String nombrecliente, Boolean activo) {
-    if (nombrecliente instanceof String) {
-
-      ClientesService.borrarcliente(nombrecliente, activo);
-      return new ResponseEntity<>(HttpStatus.OK);
-    } else {
-
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
+  @PostMapping("/borrarcliente/{nombrecliente}")
+  public @ResponseBody String borrarcliente(@RequestParam String nombrecliente) {
+    ClientesService.borrarcliente(nombrecliente, false);
+    return "Cliente eliminado";
   }
 
   //
   // MODIFICACION DE REGISTROS, USUARIOS Y CLIENTES
   //
 
-  @PostMapping(path = "modificarregistro")
-  public ResponseEntity<Integer> modificarregistro(@RequestParam Integer id, String numcliente, String nombrecliente,
-      String maccpe, String direccionip) {
-    if (id instanceof Integer) {
-
-      RegistrosService.modificarregistro(id, numcliente, nombrecliente, maccpe, direccionip);
-      return new ResponseEntity<>(HttpStatus.OK);
-    } else {
-
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
+  @PostMapping("/modificarregistro/{id}")
+  public @ResponseBody String modificarregistro(@RequestParam Integer id, @RequestParam String numcliente,
+      @RequestParam String nombrecliente, @RequestParam String maccpe, @RequestParam String direccionip,
+      @RequestParam Boolean activo) {
+    RegistrosService.modificarregistro(id, numcliente, nombrecliente, maccpe, direccionip, true);
+    return "Registro modificado";
   }
 
-  // @PutMapping(path = "/modificarregistro")
-  // public String modificarregistros(@PathVariable Integer id, @RequestBody Registros registros) {
+  // @PostMapping("/modificarusuario/{nombreusuario}")
+  // public @ResponseBody String modificarusuario(@PathVariable String
+  // nombreusuario) {
 
-  //   RegistrosService.save(registros);
-  //   return "Registro modificado correctamente.";
+  // UsuariosService.modificarusuario(null, nombreusuario, nombreusuario,
+  // nombreusuario, null);;
+  // return "Usuario modificado";
   // }
 
-  @PostMapping(path = "modificarusuario")
-  public ResponseEntity<String> modificarusuario(@RequestParam Boolean nivelacceso, String nombreusuario,
-      String password, @RequestParam String direccioncorreo) {
-    if (nombreusuario instanceof String) {
+  // @PostMapping(path = "modificarcliente")
+  // public ResponseEntity<String> modificarcliente(@RequestParam String
+  // nombrecliente, String nombreusuario,
+  // String ciudad) {
+  // if (nombrecliente instanceof String) {
 
-      UsuariosService.modificarusuario(nivelacceso, nombreusuario, password, direccioncorreo);
-      return new ResponseEntity<>(HttpStatus.OK);
-    } else {
-
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-  }
-
-  @PostMapping(path = "modificarcliente")
-  public ResponseEntity<String> modificarcliente(@RequestParam String nombrecliente, String nombreusuario,
-      String ciudad) {
-    if (nombrecliente instanceof String) {
-
-      ClientesService.modificarcliente(nombrecliente, nombreusuario, ciudad);
-      return new ResponseEntity<>(HttpStatus.OK);
-    } else {
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-  }
+  // ClientesService.modificarcliente(nombrecliente, nombreusuario, ciudad);
+  // return new ResponseEntity<>(HttpStatus.OK);
+  // } else {
+  // return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+  // }
+  // }
 
 }
