@@ -183,7 +183,7 @@ public class principal {
   }
 
   //
-  // MODIFICACION DE REGISTROS, USUARIOS Y CLIENTES
+  // MODIFICACION DE REGISTROS, USUARIOS Y CLIENTES FUNCIONANDO
   //
 
   @PutMapping(value = "/modificarregistro")
