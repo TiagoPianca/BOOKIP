@@ -16,8 +16,6 @@ public interface ClientesServices extends ClientesRepository {
 
         List<Clientes> findByNombrecliente(String nombrecliente);
 
-        // List<Clientes> findByNombreusuario(String nombreusuario);
-
         List<Clientes> findByCiudad(String ciudad);
 
         List<Clientes> findByActivo(Boolean activo);
@@ -26,12 +24,14 @@ public interface ClientesServices extends ClientesRepository {
         @Transactional
         @Query(value = "UPDATE clientes SET activo = :activo WHERE nombrecliente = :nombrecliente", nativeQuery = true)
         void borrarcliente(@Param("nombrecliente") String nombrecliente, @Param("activo") Boolean activo);
+        //
 
         @Modifying
         @Transactional
-        @Query(value = "UPDATE clientes SET nombrecliente = :nombrecliente, nombreusuario = :nombreusuario, ciudad = :ciudad WHERE nombrecliente = :nombrecliente", nativeQuery = true)
+        @Query(value = "UPDATE clientes SET nombrecliente = :nombrecliente, nombreusuario = :nombreusuario, ciudad = :ciudad, activo = :activo WHERE nombrecliente = :nombrecliente", nativeQuery = true)
         void modificarcliente(@Param("nombrecliente") String nombrecliente,
                         @Param("nombreusuario") String nombreusuario,
-                        @Param("ciudad") String ciudad);
+                        @Param("ciudad") String ciudad, @Param("activo") Boolean activo);
+        //
 
 }

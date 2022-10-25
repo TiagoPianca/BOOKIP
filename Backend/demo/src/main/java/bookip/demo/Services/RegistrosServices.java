@@ -30,12 +30,9 @@ public interface RegistrosServices extends RegistrosRepository {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE registros SET numcliente = :numcliente, nombrecliente = :nombrecliente, maccpe = :maccpe, direccionip = :direccionip WHERE id = :id", nativeQuery = true)
+    @Query(value = "UPDATE registros SET numcliente = :numcliente, nombrecliente = :nombrecliente, maccpe = :maccpe, direccionip = :direccionip, activo = :activo WHERE id = :id", nativeQuery = true)
     void modificarregistro(@Param("id") Integer id, @Param("numcliente") String numcliente,
             @Param("nombrecliente") String nombrecliente, @Param("maccpe") String maccpe,
-            @Param("direccionip") String direccionip);
-
-    
-            
+            @Param("direccionip") String direccionip, @Param("activo") Boolean activo);
 
 }

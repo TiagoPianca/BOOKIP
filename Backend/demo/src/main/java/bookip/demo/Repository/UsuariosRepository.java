@@ -8,3 +8,4 @@ import bookip.demo.models.Usuarios;
 public interface UsuariosRepository extends CrudRepository<Usuarios, Long> {
     
 }
+//Utiliza CrudRepository para la base de datos

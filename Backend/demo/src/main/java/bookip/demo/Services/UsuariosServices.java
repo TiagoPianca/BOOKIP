@@ -30,9 +30,9 @@ public interface UsuariosServices extends UsuariosRepository {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE usuarios SET nivelacceso = :nivelacceso, nombreusuario = :nombreusuario, password = :password, direccioncorreo = :direccioncorreo WHERE nombreusuario = :nombreusuario", nativeQuery = true)
+    @Query(value = "UPDATE usuarios SET nivelacceso = :nivelacceso, nombreusuario = :nombreusuario, password = :password, direccioncorreo = :direccioncorreo, activo = :activo WHERE nombreusuario = :nombreusuario", nativeQuery = true)
     void modificarusuario(@Param("nivelacceso") Boolean nivelacceso,
             @Param("nombreusuario") String nombreusuario, @Param("password") String password,
-            @Param("direccioncorreo") String direccioncorreo);
+            @Param("direccioncorreo") String direccioncorreo, @Param("activo") Boolean activo);
 
 }

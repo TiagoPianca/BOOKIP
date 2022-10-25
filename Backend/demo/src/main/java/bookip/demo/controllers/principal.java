@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import bookip.demo.Services.*;
 import bookip.demo.models.*;
-import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -29,7 +29,7 @@ public class principal {
 
   private RegistrosServices RegistrosService;
 
-  @GetMapping(path = "listarregistros")
+  @GetMapping(path = "/listarregistros")
   public Iterable<Registros> mostrarregistros() {
     return RegistrosService.findAll();
   }
@@ -37,7 +37,7 @@ public class principal {
   @Autowired
   private UsuariosServices UsuariosService;
 
-  @GetMapping(path = "listarusuarios")
+  @GetMapping(path = "/listarusuarios")
   public Iterable<Usuarios> mostrarusuarios() {
     return UsuariosService.findAll();
 
@@ -46,13 +46,13 @@ public class principal {
   @Autowired
   private ClientesServices ClientesService;
 
-  @GetMapping(path = "listarclientes")
+  @GetMapping(path = "/listarclientes")
   public Iterable<Clientes> mostrarclientes() {
     return ClientesService.findAll();
   }
 
   //
-  // ADD REGISTROS, USUARIOS Y CLIENTES
+  // ADD REGISTROS, USUARIOS Y CLIENTES FUNCIONANDO
   //
 
   @PostMapping("/agregarreg")
@@ -77,45 +77,51 @@ public class principal {
   }
 
   //
-  // BUSQUEDAS EN TABLA REGISTROS
+  // BUSQUEDAS EN TABLA REGISTROS FUNCIONANDO
   //
 
-  @GetMapping(path = "buscarpornombre")
+  @GetMapping(path = "/buscarpornombre")
   public List<Registros> buscarpornombre(@RequestParam String nombreabuscartemp) {
     return RegistrosService.findByNombrecliente(nombreabuscartemp);
   }
+  // La busqueda se hace por nombre completo, no solo una parte. Ej: Pianca NO,
+  // Piancatelli Inc. Si.
 
-  @GetMapping(path = "buscarpornumcliente")
+  @GetMapping(path = "/buscarpornumcliente")
   public List<Registros> buscarpornumcliente(@RequestParam String numeroabuscartemp) {
     return RegistrosService.findByNumcliente(numeroabuscartemp);
   }
+  // La busqueda se hace con el numero completo.
 
-  @GetMapping(path = "buscarporip")
+  @GetMapping(path = "/buscarporip")
   public List<Registros> buscarporip(@RequestParam String ipabuscartemp) {
     return RegistrosService.findByDireccionip(ipabuscartemp);
   }
+  // La busqueda se hace por la direccion Ip completa.
 
-  @GetMapping(path = "buscarpormac")
+  @GetMapping(path = "/buscarpormac")
   public List<Registros> buscarpormac(@RequestParam String macabuscartemp) {
     return RegistrosService.findByMaccpe(macabuscartemp);
   }
+  // La busqueda es con MacCpe completa.
 
-  @GetMapping(path = "buscarregistrosactivos")
+  @GetMapping(path = "/buscarregistrosactivos")
   public List<Registros> buscarregistrosactivos() {
     return RegistrosService.findByActivo(true);
   }
 
   //
-  // BUSCAR EN TABLA USUARIOS
+  // BUSCAR EN TABLA USUARIOS FUNCIONANDO
   //
 
-  @GetMapping(path = "buscarpornombreusuario")
+  @GetMapping(path = "/buscarpornombreusuario")
   public List<Usuarios> buscarpornombreusuario(@RequestParam String usuariotemp) {
     String usuarioabuscar = "%" + usuariotemp + "%";
     return UsuariosService.buscarpornombreusuario(usuarioabuscar);
   }
+  // Buscar por nombreusuario completo.
 
-  @GetMapping(path = "buscarusersactivos")
+  @GetMapping(path = "/buscarusersactivos")
   public List<Usuarios> buscarusersactivos() {
     return UsuariosService.findByActivo(true);
   }
@@ -124,17 +130,19 @@ public class principal {
   // BUSCAR EN TABLA CLIENTES
   //
 
-  @GetMapping(path = "buscarclientes")
+  @GetMapping(path = "/buscarclientes")
   public List<Clientes> buscarcliente(@RequestParam String nombreclientetemp) {
     return ClientesService.findByNombrecliente(nombreclientetemp);
   }
+  // Buscar con el nombre del cliente completo.
 
-  @GetMapping(path = "buscarporciudad")
+  @GetMapping(path = "/buscarporciudad")
   public List<Clientes> buscarciudad(@RequestParam String ciudadtemp) {
     return ClientesService.findByCiudad(ciudadtemp);
   }
+  // El nombre de la ciudad debe estar completo.
 
-  @GetMapping(path = "buscarclientesactivos")
+  @GetMapping(path = "/buscarclientesactivos")
   public List<Clientes> buscarclientesactivos() {
     return ClientesService.findByActivo(true);
   }
@@ -180,23 +188,30 @@ public class principal {
 
   @PutMapping(value = "/modificarregistro")
   public String modificarregistro(@RequestParam Integer id, @RequestParam String numcliente,
-      @RequestParam String nombrecliente, @RequestParam String maccpe, @RequestParam String direccionip) {
-
-    RegistrosService.modificarregistro(id, numcliente, nombrecliente, maccpe, direccionip);
+      @RequestParam String nombrecliente, @RequestParam String maccpe, @RequestParam String direccionip,
+      @RequestParam Boolean activo) {
+    RegistrosService.modificarregistro(id, numcliente, nombrecliente, maccpe, direccionip, true);
     return "Registro modificado";
   }
-
+  //Todos los parametros deben ser puestos para que funcione, de no ser asi se obtiene
+  //un error 400 por una BadRequest.
+  
   @PutMapping(value = "/modificarusuario")
-  public String modificarusuario(@RequestParam String nombreusuario, @RequestParam String password, @RequestParam String direccioncorreo, @RequestParam Boolean nivelacceso){
-    UsuariosService.modificarusuario(nivelacceso, nombreusuario, password, direccioncorreo);
+  public String modificarusuario(@RequestParam String nombreusuario, @RequestParam String password,
+      @RequestParam String direccioncorreo, @RequestParam Boolean nivelacceso, @RequestParam Boolean activo) {
+    UsuariosService.modificarusuario(nivelacceso, nombreusuario, password, direccioncorreo, true);
     return "Usuario modificado";
   }
+  //Todos los parametros deben ser puestos para que funcione, de no ser asi se obtiene
+  //un error 400 por una BadRequest.
 
-  @PutMapping(value="/modificarcliente")
-  public String modificarcliente(@RequestParam String nombrecliente, @RequestParam String nombreusuario, @RequestParam String ciudad) {
-      ClientesService.modificarcliente(nombrecliente, nombreusuario, ciudad);
-      return "Cliente modificado";
+  @PutMapping(value = "/modificarcliente")
+  public String modificarcliente(@RequestParam String nombrecliente, @RequestParam String nombreusuario,
+      @RequestParam String ciudad, @RequestParam Boolean activo) {
+    ClientesService.modificarcliente(nombrecliente, nombreusuario, ciudad, true);
+    return "Cliente modificado";
   }
-
-
+  //Todos los parametros deben ser puestos para que funcione, de no ser asi se obtiene
+  //un error 400 por una BadRequest.
+  
 }
