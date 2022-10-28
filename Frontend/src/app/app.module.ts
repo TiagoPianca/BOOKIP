@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { RegistrosComponentComponent } from './components/registros-component/registros-component.component';
 import { ClientesComponentComponent } from './components/clientes-component/clientes-component.component';
 import { UsuariosComponentComponent } from './components/usuarios-component/usuarios-component.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { UsuariosComponentComponent } from './components/usuarios-component/usua
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

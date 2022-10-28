@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Registros } from './models/Registros';
+import { ServiciosService } from './services/servicios.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Frontend';
+  registroacrear: Registros = new Registros();
+  nombreclientetemp: string = "";
+  constructor(private service: ServiciosService){
+
+  }
+  //FUNCIONA ESTE METODO
+  mostrarregistro(){
+    this.service.listarregistros().subscribe(dato => {console.log(dato)})
+  }
+    //FUNCIONA ESTE METODO
+  buscarpornombrecli(){
+    this.service.buscarregistropornombre(this.nombreclientetemp).subscribe(dato => {console.log(dato)})
+  }
+  //FUNCIONA ESTE METODO
+  nuevoregistro(){
+    this.service.nuevoregistro(this.registroacrear).subscribe(dato => {console.log(dato)},
+    rta => {console.log(rta.console.error.text);alert(rta)})
+  }
 }
