@@ -26,8 +26,8 @@ public class principal {
   //
 
   @Autowired
-
   private RegistrosServices RegistrosService;
+  //Inyecta las propiedades de RegistrosServices creando un objeto para permitirle inyectarla cuando sea necesario. 
 
   @GetMapping(path = "/listarregistros")
   public Iterable<Registros> mostrarregistros() {
@@ -36,6 +36,7 @@ public class principal {
 
   @Autowired
   private UsuariosServices UsuariosService;
+  //Inyecta las propiedades de UsuariosServices creando un objeto para permitirle inyectarla cuando sea necesario. 
 
   @GetMapping(path = "/listarusuarios")
   public Iterable<Usuarios> mostrarusuarios() {
@@ -45,6 +46,7 @@ public class principal {
 
   @Autowired
   private ClientesServices ClientesService;
+  //Inyecta las propiedades de ClientesServices creando un objeto para permitirle inyectarla cuando sea necesario. 
 
   @GetMapping(path = "/listarclientes")
   public Iterable<Clientes> mostrarclientes() {
@@ -61,6 +63,9 @@ public class principal {
     RegistrosService.save(registros);
     return "Registro guardado exitosamente";
   }
+  //Postea un nuevo registro solicitando los parametros con un @RequestBody 
+  //Luego, guarda el contenido del Body dentro un objeto de entidad Registros y muestra
+  //un mensaje de confirmación de guardado.
 
   @PostMapping(path = "/agregaruser")
   public String addNewUsuario(@RequestBody Usuarios usuarios) {
@@ -68,6 +73,9 @@ public class principal {
     UsuariosService.save(usuarios);
     return "Usuario guardado exitosamente";
   }
+  //Postea un nuevo usuario solicitando los parametros con un @RequestBody 
+  //Luego, guarda el contenido del Body dentro un objeto de entidad Usuarios y muestra
+  //un mensaje de confirmación de guardado.
 
   @PostMapping(path = "/agregarcli")
   public String addNewCliente(@RequestBody Clientes clientes) {
@@ -75,6 +83,9 @@ public class principal {
     ClientesService.save(clientes);
     return "CLiente guardado exitosamente";
   }
+  //Postea un nuevo cliente solicitando los parametros con un @RequestBody 
+  //Luego, guarda el contenido del Body dentro un objeto de entidad Clientes y muestra
+  //un mensaje de confirmación de guardado.
 
   //
   // BUSQUEDAS EN TABLA REGISTROS FUNCIONANDO
@@ -84,6 +95,8 @@ public class principal {
   public List<Registros> buscarpornombre(@RequestParam String nombreabuscartemp) {
     return RegistrosService.findByNombrecliente(nombreabuscartemp);
   }
+  // Hace una busqueda avanzada de nombrecliente mediante un metodo definido en 
+  // el servicio.
   // La busqueda se hace por nombre completo, no solo una parte. Ej: Pianca NO,
   // Piancatelli Inc. Si.
 
@@ -109,6 +122,8 @@ public class principal {
   public List<Registros> buscarregistrosactivos() {
     return RegistrosService.findByActivo(true);
   }
+  //Realiza la busqueda de registros activos mediante el método del servico
+  //en donde le pasamos el parámetro true para que traiga todos los activos.
 
   //
   // BUSCAR EN TABLA USUARIOS FUNCIONANDO
@@ -169,6 +184,9 @@ public class principal {
     return "Registro eliminado";
 
   }
+  //Utilizo un post para el Delete para poder cambiar el valor de la columna
+  //activo pasandole por parámetro con el Path el id del registro que solicita el método.
+  //Luego, muestra un mensaje para que sepamos que fue realizado correctamente.
 
   @PostMapping("/borrarusuario/{nombreusuario}")
   public @ResponseBody String borrarusuario(@PathVariable String nombreusuario) {

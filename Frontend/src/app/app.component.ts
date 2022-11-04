@@ -24,7 +24,6 @@ export class AppComponent {
   }
   //FUNCIONA ESTE METODO
   nuevoregistro(){
-    this.service.nuevoregistro(this.registroacrear).subscribe(dato => {console.log(dato)},
-    rta => {console.log(rta.console.error.text);alert(rta)})
+    this.service.nuevoregistro(this.registroacrear).subscribe(dato => {console.log(dato)})
   }
 }

@@ -38,6 +38,8 @@ export class ServiciosService {
       "maccpe": registro.maccpe,
       "direccionip": registro.direccionip,
       "activo": registro.activo
-  })
+      //Parámetros que solicito desde el Back.
+  },{responseType:'text'})
   }
+  //Responsetype agarra la respuesta y retorna solo el texto de la respuesta.
 }
