@@ -7,6 +7,8 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Registros } from '../models/Registros';
+import { Clientes } from 'app/models/Clientes';
+import { Usuarios } from 'app/models/Usuarios';
 
 //Para todos los mapping, utilizar service.
 @Injectable({
@@ -20,6 +22,12 @@ export class ServiciosService {
   //Listar
   listarregistros(): Observable<Registros[]> {
     return this.http.get<Registros[]>(`${this.path}/listarregistros`)
+  }
+  listarclientes(): Observable<Clientes[]> {
+    return this.http.get<Clientes[]>(`${this.path}/listarclientes`)
+  }
+  listarusuario(): Observable<Usuarios[]> {
+    return this.http.get<Usuarios[]>(`${this.path}/listarusuarios`)
   }
 
   //Buscar

@@ -18,6 +18,12 @@ export class AppComponent {
   mostrarregistro(){
     this.service.listarregistros().subscribe(dato => {console.log(dato)})
   }
+  mostrarcliente(){
+    this.service.listarclientes().subscribe(dato => {console.log(dato)})
+  }
+  mostrarusuario(){
+    this.service.listarusuario().subscribe(dato => {console.log(dato)})
+  }
     //FUNCIONA ESTE METODO
   buscarpornombrecli(){
     this.service.buscarregistropornombre(this.nombreclientetemp).subscribe(dato => {console.log(dato)})
