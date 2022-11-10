@@ -1,5 +1,6 @@
 package bookip.demo.controllers;
 
+// import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,15 @@ public class principal {
 
   @GetMapping(path = "/listarclientes")
   public Iterable<Clientes> mostrarclientes() {
+    // List <Clientes>listaclientes = new ArrayList<>();
+    // List <Clientes>listaclientesactivos = new ArrayList<>();
+    // listaclientes = (List<Clientes>)ClientesService.findAll();
+
+    // for(int i = 0; i<listaclientes.size(); i++){
+    //   if(listaclientes.get(i).getActivo()== true){
+    //     listaclientesactivos.add(listaclientes.get(i));
+    //   }
+    // }
     return ClientesService.findAll();
   }
 

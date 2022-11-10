@@ -45,7 +45,7 @@
   <button class="btn botones ">Enviar</button>
 </form>
 </div>-->
-<body>
+<body >
  <header>
   <a  href = "#" class="logo">
       <img src="../assets/img/logobookip.png" alt="Logo BOOKIP" class="logo">
@@ -57,14 +57,17 @@
   </nav>
 </header>
  
-<div class="registros">
-  <button type="button" class="btn btn-primary" (click)="mostrarregistro()">Registros</button>
+<div class="btn-container">
+  <button type="button" class="btn btn-primary" (click)="mostrarregistro()">
+    Registros
+  </button>
+  <button type="button" class="btn btn-primary" (click)="mostrarcliente()">
+    Clientes
+  </button>
+  <button type="button" class="btn btn-primary" (click)="mostrarusuario()">
+    Usuarios
+  </button>
 </div>
-<div class="clientes">
-  <button type="button" class="btn btn-primary" (click)="mostrarcliente()">Clientes</button>
 
-</div>
-<div class="usuarios">
-  <button type="button" class="btn btn-primary" (click)="mostrarusuario()">Usuarios</button>
-</div>
+<app-tabla [tabla]="currenttabla"></app-tabla>
 </body>

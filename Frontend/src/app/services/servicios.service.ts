@@ -26,7 +26,7 @@ export class ServiciosService {
   listarclientes(): Observable<Clientes[]> {
     return this.http.get<Clientes[]>(`${this.path}/listarclientes`)
   }
-  listarusuario(): Observable<Usuarios[]> {
+  listarusuarios(): Observable<Usuarios[]> {
     return this.http.get<Usuarios[]>(`${this.path}/listarusuarios`)
   }
 
@@ -50,4 +50,25 @@ export class ServiciosService {
   },{responseType:'text'})
   }
   //Responsetype agarra la respuesta y retorna solo el texto de la respuesta.
+  nuevocliente(cliente : Clientes){
+    return this.http.post(`${this.path}/agregarcli`,
+    {
+      "nombrecliente": cliente.nombrecliente,
+      "nombreusuario": cliente.nombreusuario,
+      "ciudad": cliente.ciudad,
+      "activo": cliente.activo
+      //Parámetros que solicito desde el Back.
+  },{responseType:'text'})
+  }
+  nuevousuario(usuario : Usuarios){
+    return this.http.post(`${this.path}/agregaruser`,
+    {
+      "nombreusuario": usuario.nombreusuario,
+      "password": usuario.password,
+      "direccioncorreo": usuario.direccioncorreo,
+      "nivelacceso": usuario.nivelacceso,
+      "activo": usuario.activo
+      //Parámetros que solicito desde el Back.
+  },{responseType:'text'})
+  }
 }

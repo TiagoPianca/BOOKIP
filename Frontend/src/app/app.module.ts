@@ -9,13 +9,15 @@ import { UsuariosComponentComponent } from './components/usuarios-component/usua
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TablaComponent } from './components/tabla/tabla.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrosComponentComponent,
     ClientesComponentComponent,
-    UsuariosComponentComponent
+    UsuariosComponentComponent,
+    TablaComponent
   ],
   imports: [
     BrowserModule,

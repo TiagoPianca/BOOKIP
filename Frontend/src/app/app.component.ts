@@ -11,18 +11,19 @@ export class AppComponent {
   title = 'Frontend';
   registroacrear: Registros = new Registros();
   nombreclientetemp: string = "";
+  currenttabla: any;
   constructor(private service: ServiciosService){
 
   }
   //FUNCIONA ESTE METODO
   mostrarregistro(){
-    this.service.listarregistros().subscribe(dato => {console.log(dato)})
+    this.service.listarregistros().subscribe((dato) => {this.currenttabla = dato})
   }
   mostrarcliente(){
-    this.service.listarclientes().subscribe(dato => {console.log(dato)})
+    this.service.listarclientes().subscribe((dato) => {this.currenttabla = dato})
   }
   mostrarusuario(){
-    this.service.listarusuario().subscribe(dato => {console.log(dato)})
+    this.service.listarusuarios().subscribe((dato) => {this.currenttabla = dato})
   }
     //FUNCIONA ESTE METODO
   buscarpornombrecli(){

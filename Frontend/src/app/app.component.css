@@ -1,6 +1,9 @@
 body{
     font-family: sans-serif;
     margin: 0;
+    background-image: url(assets/img/imagen_background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 a{
     text-decoration: none;
@@ -35,9 +38,15 @@ nav a:hover{
 div button{
     display:flex;
     margin: auto;
+    background-color: black;
+    font-size: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
 }
 .registros{
     display:flex;
     margin: auto;
+}
+.btn-container {
+    display: flex;
 }
