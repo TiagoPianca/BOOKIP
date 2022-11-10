@@ -38,6 +38,7 @@ nav a:hover{
 div button{
     display:flex;
     margin: auto;
+    margin-top: 10px;
     background-color: black;
     font-size: 25px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
