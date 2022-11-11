@@ -45,29 +45,35 @@
   <button class="btn botones ">Enviar</button>
 </form>
 </div>-->
-<body >
- <header>
-  <a  href = "http://localhost:4200" class="logo">
-      <img src="../assets/img/logobookip.png" alt="Logo BOOKIP" class="logo">
-      <h2 class = "logo-nombre">BOOKIP</h2>
-  </a>
-  <nav>
-    <a href="" class="nav-link">Sobre Nosotros</a>
-    <a href="" class="nav-link">Contacto</a>
-  </nav>
-</header>
- 
-<div class="btn-container">
-  <button type="button" class="btn btn-primary" (click)="mostrarregistro()">
-    Registros
-  </button>
-  <button type="button" class="btn btn-primary" (click)="mostrarcliente()">
-    Clientes
-  </button>
-  <button type="button" class="btn btn-primary" (click)="mostrarusuario()">
-    Usuarios
-  </button>
-</div>
 
-<app-tabla [tabla]="currenttabla"></app-tabla>
+<body>
+  <div class="fondo"></div>
+  <header>
+    <a href="http://localhost:4200" class="logo">
+      <img src="../assets/img/logobookip.png" alt="Logo BOOKIP" class="logo">
+      <h2 class="logo-nombre">BOOKIP</h2>
+    </a>
+    <nav>
+      <a href="" class="nav-link">Sobre Nosotros</a>
+      <a href="" class="nav-link">Contacto</a>
+    </nav>
+  </header>
+
+  <div class="btn-container">
+    <button type="button" class="btn btn-primary" (click)="mostrarregistro()">
+      Registros
+    </button>
+    <button type="button" class="btn btn-primary" (click)="mostrarcliente()">
+      Clientes
+    </button>
+    <button type="button" class="btn btn-primary" (click)="mostrarusuario()">
+      Usuarios
+    </button>
+  </div>
+
+
+  <app-tabla [tabla]="currenttabla"></app-tabla>
+
+  
+
 </body>
