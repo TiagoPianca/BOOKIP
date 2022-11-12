@@ -70,5 +70,89 @@
 
       </div>
     </div>
+    <div class="modal fade" id="formulariousuario" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Usuario</h1>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="nuevousuario()">
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Nombre de Usuario:</label>
+                <input type="text" class="form-control" required [(ngModel)]="usuarioacrear.nombreusuario"
+                  [ngModelOptions]="{standalone: true}" name="" matInput placeholder="Nombre de Usuario">
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Correo Electrónico:</label>
+                <input type="text" class="form-control" required [(ngModel)]="usuarioacrear.direccioncorreo"
+                  [ngModelOptions]="{standalone: true}" name="" matInput placeholder="Correo Electrónico">
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Password:</label>
+                <input type="text" class="form-control" required [(ngModel)]="usuarioacrear.password"
+                  [ngModelOptions]="{standalone: true}" name="" matInput placeholder="Password">
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Nivel de Acceso:</label>
+                <input type="text" class="form-control" required [(ngModel)]="usuarioacrear.nivelacceso"
+                  [ngModelOptions]="{standalone: true}" name="" matInput placeholder="Nivel de Acceso">
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Activo:</label>
+                <input type="text" class="form-control" required [(ngModel)]="usuarioacrear.activo"
+                  [ngModelOptions]="{standalone: true}" name="" matInput placeholder="activo">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <input type="submit" class="btn btn-primary" value="Guardar Registro">
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal fade" id="formulariocliente" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Cliente</h1>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="nuevocliente()">
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Nombre de Usuario:</label>
+                <input type="text" class="form-control" required [(ngModel)]="clienteacrear.nombreusuario"
+                  [ngModelOptions]="{standalone: true}" name="" matInput placeholder="Nombre de Usuario">
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Nombre del Cliente:</label>
+                <input type="text" class="form-control" required [(ngModel)]="clienteacrear.nombrecliente"
+                  [ngModelOptions]="{standalone: true}" name="" matInput placeholder="Nombre del Cliente">
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Ciudad:</label>
+                <input type="text" class="form-control" required [(ngModel)]="clienteacrear.ciudad"
+                  [ngModelOptions]="{standalone: true}" name="" matInput placeholder="Ciudad">
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Activo:</label>
+                <input type="text" class="form-control" required [(ngModel)]="clienteacrear.activo"
+                  [ngModelOptions]="{standalone: true}" name="" matInput placeholder="Activo">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <input type="submit" class="btn btn-primary" value="Guardar Cliente">
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>
