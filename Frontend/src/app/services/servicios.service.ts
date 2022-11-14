@@ -18,7 +18,7 @@ export class ServiciosService {
   private path = 'http://localhost:8080';
   constructor(private http: HttpClient) {
   }
-  
+
   //Listar
   listarregistros(): Observable<Registros[]> {
     return this.http.get<Registros[]>(`${this.path}/listarregistros`)
@@ -31,44 +31,55 @@ export class ServiciosService {
   }
 
   //Buscar
-  buscarregistropornombre(nombreabuscartemp:string){
-    return this.http.get(`${this.path}/buscarpornombre`,{params :{nombreabuscartemp,},});
+  buscarregistropornombre(nombreabuscartemp: string) {
+    return this.http.get(`${this.path}/buscarpornombre`, { params: { nombreabuscartemp, }, });
   }
   //Parametro como esta en el back.
 
   //Agregar
-  nuevoregistro(registro : Registros){
+  nuevoregistro(registro: Registros) {
     return this.http.post(`${this.path}/agregarreg`,
-    {
-      "id": registro.id,
-      "numcliente": registro.numcliente,
-      "nombrecliente": registro.nombrecliente,
-      "maccpe": registro.maccpe,
-      "direccionip": registro.direccionip,
-      "activo": registro.activo
-      //Parámetros que solicito desde el Back.
-  },{responseType:'text'})
+      {
+        "id": registro.id,
+        "numcliente": registro.numcliente,
+        "nombrecliente": registro.nombrecliente,
+        "maccpe": registro.maccpe,
+        "direccionip": registro.direccionip,
+        "activo": registro.activo
+        //Parámetros que solicito desde el Back.
+      }, { responseType: 'text' })
   }
   //Responsetype agarra la respuesta y retorna solo el texto de la respuesta.
-  nuevocliente(cliente : Clientes){
+  nuevocliente(cliente: Clientes) {
     return this.http.post(`${this.path}/agregarcli`,
-    {
-      "nombrecliente": cliente.nombrecliente,
-      "nombreusuario": cliente.nombreusuario,
-      "ciudad": cliente.ciudad,
-      "activo": cliente.activo
-      //Parámetros que solicito desde el Back.
-  },{responseType:'text'})
+      {
+        "nombrecliente": cliente.nombrecliente,
+        "nombreusuario": cliente.nombreusuario,
+        "ciudad": cliente.ciudad,
+        "activo": cliente.activo
+        //Parámetros que solicito desde el Back.
+      }, { responseType: 'text' })
   }
-  nuevousuario(usuario : Usuarios){
+  nuevousuario(usuario: Usuarios) {
     return this.http.post(`${this.path}/agregaruser`,
-    {
-      "nombreusuario": usuario.nombreusuario,
-      "password": usuario.password,
-      "direccioncorreo": usuario.direccioncorreo,
-      "nivelacceso": usuario.nivelacceso,
-      "activo": usuario.activo
-      //Parámetros que solicito desde el Back.
-  },{responseType:'text'})
+      {
+        "nombreusuario": usuario.nombreusuario,
+        "password": usuario.password,
+        "direccioncorreo": usuario.direccioncorreo,
+        "nivelacceso": usuario.nivelacceso,
+        "activo": usuario.activo
+        //Parámetros que solicito desde el Back.
+      }, { responseType: 'text' })
+  }
+  modificarregistro(registro: Registros) {
+    return this.http.put(`${this.path}/modificarregistro`,
+      {
+        "id": registro.id,
+        "numcliente": registro.numcliente,
+        "nombrecliente": registro.nombrecliente,
+        "maccpe": registro.maccpe,
+        "direccionip": registro.direccionip,
+        "activo": registro.activo
+      }, { responseType: 'text' })
   }
 }

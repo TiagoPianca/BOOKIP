@@ -33,14 +33,4 @@ export class AppComponent {
   // buscarpornombrecli(){
   //   this.service.buscarregistropornombre(this.nombreclientetemp).subscribe(dato => {console.log(dato)})
   // }
-  //FUNCIONA ESTE METODO
-  nuevoregistro(){
-    this.service.nuevoregistro(this.registroacrear).subscribe(dato => {console.log(dato)})
-  }
-  nuevocliente(){
-    this.service.nuevocliente(this.clienteacrear).subscribe(dato => {console.log(dato)})
-  }
-  nuevousuario(){
-    this.service.nuevousuario(this.usuarioacrear).subscribe(dato => {console.log(dato)})
-  }
 }
