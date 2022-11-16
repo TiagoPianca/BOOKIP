@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Clientes } from './models/Clientes';
+import { Registros } from './models/Registros';
+import { Usuarios } from './models/Usuarios';
+import { ServiciosService } from './services/servicios.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +11,26 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Frontend';
+  registroacrear: Registros = new Registros();
+  clienteacrear: Clientes = new Clientes();
+  usuarioacrear: Usuarios = new Usuarios();
+  nombreclientetemp: string = "";
+  currenttabla: any;
+  constructor(private service: ServiciosService){
+
+  }
+  //FUNCIONA ESTE METODO
+  mostrarregistro(){
+    this.service.listarregistros().subscribe((dato) => {this.currenttabla = dato})
+  }
+  mostrarcliente(){
+    this.service.listarclientes().subscribe((dato) => {this.currenttabla = dato})
+  }
+  mostrarusuario(){
+    this.service.listarusuarios().subscribe((dato) => {this.currenttabla = dato})
+  }
+    //FUNCIONA ESTE METODO
+  // buscarpornombrecli(){
+  //   this.service.buscarregistropornombre(this.nombreclientetemp).subscribe(dato => {console.log(dato)})
+  // }
 }

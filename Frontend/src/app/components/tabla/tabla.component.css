@@ -1,0 +1,33 @@
+.container{
+    width: 100%;
+    margin-top: 20px;
+    border-style: solid;
+    background-color: rgba(128, 128, 128, 0.267);
+    color:white;
+}
+table {
+    width: 100%;
+    font-size: 1,30em;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+
+}
+h1 {
+    color: blue;
+}
+.btn-container2{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: black;
+    
+}
+.btn {
+    background-color: black;
+    font-size: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-right: 20px;
+    
+}
