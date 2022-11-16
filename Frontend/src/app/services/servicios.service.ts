@@ -71,8 +71,8 @@ export class ServiciosService {
         //Parámetros que solicito desde el Back.
       }, { responseType: 'text' })
   }
-  modificarregistro(registro: Registros) {
-    return this.http.put(`${this.path}/modificarregistro`,
+  modificarregistro(id: number,registro: Registros) {
+    return this.http.put(`${this.path}/modificarregistro/`,
       {
         "id": registro.id,
         "numcliente": registro.numcliente,
@@ -81,5 +81,24 @@ export class ServiciosService {
         "direccionip": registro.direccionip,
         "activo": registro.activo
       }, { responseType: 'text' })
+  }
+  modificarcliente(nombrecliente: string, cliente: Clientes){
+    return this.http.put(`${this.path}/modificarcliente/`,
+    {
+      "nombreusuario": cliente.nombrecliente,
+      "nombrecliente": cliente.nombrecliente,
+      "ciudad": cliente.ciudad,
+      "activo": cliente.activo
+    }, {responseType: 'text' })
+  }
+  modificarusuario(nombreusuario: string, usuario: Usuarios){
+    return this.http.put(`${this.path}/modificarusuario/`,
+    {
+      "nombreusuario": usuario.nombreusuario,
+      "direccioncorreo": usuario.direccioncorreo,
+      "password": usuario.password,
+      "nivelacceso": usuario.nivelacceso,
+      "activo": usuario.activo
+    }, {responseType: 'text'})
   }
 }

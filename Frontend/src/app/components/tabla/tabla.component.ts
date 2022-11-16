@@ -38,6 +38,15 @@ export class TablaComponent implements OnInit {
     this.service.nuevousuario(this.usuarioacrear).subscribe(dato => {console.log(dato)})
   }
   modificarregistro(){
-    this.service.modificarregistro(this.registroacrear).subscribe(dato => {console.log(dato)})
+    let id:number
+    this.service.modificarregistro(this.registroacrear.id,this.registroacrear).subscribe(dato => {console.log(dato)})
+  }
+  modificarcliente(){
+    let nombrecliente: string
+    this.service.modificarcliente(this.clienteacrear.nombrecliente,this.clienteacrear).subscribe(dato => {console.log(dato)})
+  }
+  modificarusuario(){
+    let nombreusuario: string
+    this.service.modificarusuario(this.usuarioacrear.nombreusuario,this.usuarioacrear).subscribe(dato => {console.log(dato)})
   }
 }

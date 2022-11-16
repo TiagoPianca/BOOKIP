@@ -215,28 +215,27 @@ public class principal {
   //
 
   @PutMapping(value = "/modificarregistro")
-  public String modificarregistro(@RequestParam Integer id, @RequestParam String numcliente,
-      @RequestParam String nombrecliente, @RequestParam String maccpe, @RequestParam String direccionip,
-      @RequestParam Boolean activo) {
-    RegistrosService.modificarregistro(id, numcliente, nombrecliente, maccpe, direccionip, true);
+  public String modificarregistro(@RequestBody Registros registronuevo) {
+    registronuevo.setActivo(true);
+    RegistrosService.save(registronuevo);
     return "Registro modificado";
   }
   //Todos los parametros deben ser puestos para que funcione, de no ser asi se obtiene
   //un error 400 por una BadRequest.
   
   @PutMapping(value = "/modificarusuario")
-  public String modificarusuario(@RequestParam String nombreusuario, @RequestParam String password,
-      @RequestParam String direccioncorreo, @RequestParam Boolean nivelacceso, @RequestParam Boolean activo) {
-    UsuariosService.modificarusuario(nivelacceso, nombreusuario, password, direccioncorreo, true);
+  public String modificarusuario(@RequestBody Usuarios usuarionuevo) {
+    usuarionuevo.setActivo(true);
+    UsuariosService.save(usuarionuevo);
     return "Usuario modificado";
   }
   //Todos los parametros deben ser puestos para que funcione, de no ser asi se obtiene
   //un error 400 por una BadRequest.
 
   @PutMapping(value = "/modificarcliente")
-  public String modificarcliente(@RequestParam String nombrecliente, @RequestParam String nombreusuario,
-      @RequestParam String ciudad, @RequestParam Boolean activo) {
-    ClientesService.modificarcliente(nombrecliente, nombreusuario, ciudad, true);
+  public String modificarcliente(@RequestBody Clientes clientenuevo) {
+    clientenuevo.setActivo(true);
+    ClientesService.save(clientenuevo);
     return "Cliente modificado";
   }
   //Todos los parametros deben ser puestos para que funcione, de no ser asi se obtiene
