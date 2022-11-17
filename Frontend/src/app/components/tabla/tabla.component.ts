@@ -3,6 +3,7 @@ import { Clientes } from 'app/models/Clientes';
 import { Registros } from 'app/models/Registros';
 import { Usuarios } from 'app/models/Usuarios';
 import { ServiciosService } from 'app/services/servicios.service';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 @Component({
   selector: 'app-tabla',
@@ -21,32 +22,48 @@ export class TablaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  mostrar(){
+  mostrar() {
     console.log(this.tabla)
   }
 
-  getKeys(data: any){
+  getKeys(data: any) {
     return Object.keys(data);
   }
-  nuevoregistro(){
-    this.service.nuevoregistro(this.registroacrear).subscribe(dato => {console.log(dato)})
+  nuevoregistro() {
+    this.service.nuevoregistro(this.registroacrear).subscribe(dato => { console.log(dato) })
   }
-  nuevocliente(){
-    this.service.nuevocliente(this.clienteacrear).subscribe(dato => {console.log(dato)})
+  nuevocliente() {
+    this.service.nuevocliente(this.clienteacrear).subscribe(dato => { console.log(dato) })
   }
-  nuevousuario(){
-    this.service.nuevousuario(this.usuarioacrear).subscribe(dato => {console.log(dato)})
+  nuevousuario() {
+    this.service.nuevousuario(this.usuarioacrear).subscribe(dato => { console.log(dato) })
   }
-  modificarregistro(){
-    let id:number
-    this.service.modificarregistro(this.registroacrear.id,this.registroacrear).subscribe(dato => {console.log(dato)})
+  modificarregistro() {
+    let id: number
+    this.service.modificarregistro(this.registroacrear.id, this.registroacrear).subscribe(dato => { console.log(dato) })
   }
-  modificarcliente(){
+  modificarcliente() {
     let nombrecliente: string
-    this.service.modificarcliente(this.clienteacrear.nombrecliente,this.clienteacrear).subscribe(dato => {console.log(dato)})
+    this.service.modificarcliente(this.clienteacrear.nombrecliente, this.clienteacrear).subscribe(dato => { console.log(dato) })
   }
-  modificarusuario(){
+  modificarusuario() {
     let nombreusuario: string
-    this.service.modificarusuario(this.usuarioacrear.nombreusuario,this.usuarioacrear).subscribe(dato => {console.log(dato)})
+    this.service.modificarusuario(this.usuarioacrear.nombreusuario, this.usuarioacrear).subscribe(dato => { 
+      let icono: SweetAlertIcon;
+
+      if(dato== 'Usuario modificado'){
+        icono = "success";
+      }else{
+        icono = "error";
+      }
+
+      Swal.fire({
+        position: 'top',
+        icon: icono,
+        title: dato,
+        timer: undefined
+      })
+
+    })
   }
 }
