@@ -44,7 +44,7 @@ export class TablaComponent implements OnInit {
         position: 'top',
         icon: icono,
         title: dato,
-        timer: 1200
+        timer: undefined
       })
     })
   }
@@ -62,7 +62,7 @@ export class TablaComponent implements OnInit {
         position: 'top',
         icon: icono,
         title: dato,
-        timer: 1200
+        timer: undefined
       })
      })
   }
@@ -80,7 +80,7 @@ export class TablaComponent implements OnInit {
         position: 'top',
         icon: icono,
         title: dato,
-        timer: 1200
+        timer: undefined
       })
     })
   }
@@ -99,7 +99,7 @@ export class TablaComponent implements OnInit {
         position: 'top',
         icon: icono,
         title: dato,
-        timer: 1200
+        timer: undefined
       })
      })
   }
@@ -118,7 +118,7 @@ export class TablaComponent implements OnInit {
         position: 'top',
         icon: icono,
         title: dato,
-        timer: 1200
+        timer: undefined
       })
     })
   }
@@ -137,7 +137,7 @@ export class TablaComponent implements OnInit {
         position: 'top',
         icon: icono,
         title: dato,
-        timer: 1200
+        timer: undefined
       })
 
     })
