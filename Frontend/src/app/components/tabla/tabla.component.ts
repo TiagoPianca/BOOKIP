@@ -37,15 +37,14 @@ export class TablaComponent implements OnInit {
       if(dato == 'Registro guardado exitosamente'){
         icono = "success";
       }else{
-        icono= "error";
+        icono = "error";
       }
 
       Swal.fire({
         position: 'top',
         icon: icono,
         title: dato,
-        showConfirmButton: true,
-        timer: undefined
+        timer: 1200
       })
     })
   }
@@ -63,8 +62,7 @@ export class TablaComponent implements OnInit {
         position: 'top',
         icon: icono,
         title: dato,
-        showConfirmButton: true,
-        timer: undefined
+        timer: 1200
       })
      })
   }
@@ -82,8 +80,7 @@ export class TablaComponent implements OnInit {
         position: 'top',
         icon: icono,
         title: dato,
-        showConfirmButton: true,
-        timer: undefined
+        timer: 1200
       })
     })
   }
@@ -102,8 +99,7 @@ export class TablaComponent implements OnInit {
         position: 'top',
         icon: icono,
         title: dato,
-        showConfirmButton: true,
-        timer: undefined
+        timer: 1200
       })
      })
   }
@@ -122,8 +118,7 @@ export class TablaComponent implements OnInit {
         position: 'top',
         icon: icono,
         title: dato,
-        showConfirmButton: true,
-        timer: undefined
+        timer: 1200
       })
     })
   }
@@ -142,10 +137,13 @@ export class TablaComponent implements OnInit {
         position: 'top',
         icon: icono,
         title: dato,
-        showConfirmButton: true,
-        timer: undefined
+        timer: 1200
       })
 
     })
+  }
+  deshabilitarregistro(){
+    let id: number
+    this.service.deshabilitarregistro(this.registroacrear.id, this.registroacrear).subscribe(dato => {console.log(dato)})
   }
 }

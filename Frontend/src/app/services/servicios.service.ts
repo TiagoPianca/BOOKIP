@@ -101,4 +101,11 @@ export class ServiciosService {
         "activo": usuario.activo
       }, { responseType: 'text' })
   }
+  deshabilitarregistro(id: number, registro: Registros){
+    return this.http.post(`${this.path}/borrarregistro/{id}`,
+    {
+      "activo": registro.activo
+    }, {responseType: 'text'}
+    )
+  }
 }
