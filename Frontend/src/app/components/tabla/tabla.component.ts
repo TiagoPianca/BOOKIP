@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { isFormControl } from '@angular/forms';
 import { Clientes } from 'app/models/Clientes';
 import { Registros } from 'app/models/Registros';
 import { Usuarios } from 'app/models/Usuarios';
@@ -30,21 +31,101 @@ export class TablaComponent implements OnInit {
     return Object.keys(data);
   }
   nuevoregistro() {
-    this.service.nuevoregistro(this.registroacrear).subscribe(dato => { console.log(dato) })
+    this.service.nuevoregistro(this.registroacrear).subscribe(dato => {
+      let icono: SweetAlertIcon;
+
+      if(dato == 'Registro guardado exitosamente'){
+        icono = "success";
+      }else{
+        icono= "error";
+      }
+
+      Swal.fire({
+        position: 'top',
+        icon: icono,
+        title: dato,
+        showConfirmButton: true,
+        timer: undefined
+      })
+    })
   }
   nuevocliente() {
-    this.service.nuevocliente(this.clienteacrear).subscribe(dato => { console.log(dato) })
+    this.service.nuevocliente(this.clienteacrear).subscribe(dato => {
+      let icono: SweetAlertIcon;
+
+      if(dato == 'Cliente guardado exitosamente'){
+        icono = "success";
+      }else{
+        icono = "error";
+      }
+
+      Swal.fire({
+        position: 'top',
+        icon: icono,
+        title: dato,
+        showConfirmButton: true,
+        timer: undefined
+      })
+     })
   }
   nuevousuario() {
-    this.service.nuevousuario(this.usuarioacrear).subscribe(dato => { console.log(dato) })
+    this.service.nuevousuario(this.usuarioacrear).subscribe(dato => { 
+      let icono: SweetAlertIcon;
+
+      if(dato == 'Usuario guardado exitosamente'){
+        icono = "success";
+      }else{
+        icono = "error";
+      }
+
+      Swal.fire({
+        position: 'top',
+        icon: icono,
+        title: dato,
+        showConfirmButton: true,
+        timer: undefined
+      })
+    })
   }
   modificarregistro() {
     let id: number
-    this.service.modificarregistro(this.registroacrear.id, this.registroacrear).subscribe(dato => { console.log(dato) })
+    this.service.modificarregistro(this.registroacrear.id, this.registroacrear).subscribe(dato => {
+      let icono: SweetAlertIcon;
+
+      if(dato == 'Registro modificado'){
+        icono = "success";
+      }else{
+        icono = "error";
+      }
+
+      Swal.fire({
+        position: 'top',
+        icon: icono,
+        title: dato,
+        showConfirmButton: true,
+        timer: undefined
+      })
+     })
   }
   modificarcliente() {
     let nombrecliente: string
-    this.service.modificarcliente(this.clienteacrear.nombrecliente, this.clienteacrear).subscribe(dato => { console.log(dato) })
+    this.service.modificarcliente(this.clienteacrear.nombrecliente, this.clienteacrear).subscribe(dato => {
+      let icono: SweetAlertIcon;
+
+      if(dato== 'Cliente modificado'){
+        icono = "success";
+      }else{
+        icono = "error";
+      }
+
+      Swal.fire({
+        position: 'top',
+        icon: icono,
+        title: dato,
+        showConfirmButton: true,
+        timer: undefined
+      })
+    })
   }
   modificarusuario() {
     let nombreusuario: string
@@ -61,6 +142,7 @@ export class TablaComponent implements OnInit {
         position: 'top',
         icon: icono,
         title: dato,
+        showConfirmButton: true,
         timer: undefined
       })
 

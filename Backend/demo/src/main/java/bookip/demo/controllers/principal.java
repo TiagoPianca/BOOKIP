@@ -96,7 +96,7 @@ public class principal {
   public String addNewCliente(@RequestBody Clientes clientes) {
 
     ClientesService.save(clientes);
-    return "CLiente guardado exitosamente";
+    return "Cliente guardado exitosamente";
   }
   // Postea un nuevo cliente solicitando los parametros con un @RequestBody
   // Luego, guarda el contenido del Body dentro un objeto de entidad Clientes y
